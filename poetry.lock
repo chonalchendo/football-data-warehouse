@@ -1663,6 +1663,20 @@ setuptools = ">=61.0"
 scripts = ["click (>=6.0)"]
 
 [[package]]
+name = "isort"
+version = "5.13.2"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.8.0"
+files = [
+    {file = "isort-5.13.2-py3-none-any.whl", hash = "sha256:8ca5e72a8d85860d5a3fa69b8745237f2939afe12dbf656afbcb47fe72d947a6"},
+    {file = "isort-5.13.2.tar.gz", hash = "sha256:48fdfcb9face5d58a4f6dde2e72a1fb8dcaf8ab26f95ab49fab84c2ddefb0109"},
+]
+
+[package.extras]
+colors = ["colorama (>=0.4.6)"]
+
+[[package]]
 name = "itemadapter"
 version = "0.9.0"
 description = "Common interface for data container classes"
@@ -3469,4 +3483,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "19c260f50d05410c74d8565d4111d63f95a05c3cfeef29d3b5c443fc257a0922"
+content-hash = "99d71af6aa3b92552bf9719691be7b2a43cfa6d4f91c01edaeaf32deafe116d6"
