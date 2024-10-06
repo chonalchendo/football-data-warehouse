@@ -1,4 +1,5 @@
 import argparse
+
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings
