@@ -26,3 +26,29 @@ $PYTHON_PATH -m src.extractors.$SCRIPT "$@"
 
 # Print a message when done
 echo "Crawler run complete!"
+
+# DVC operations
+echo "Starting DVC operations..."
+
+# Add new data to DVC
+dvc add data/raw/
+
+# Commit changes to DVC
+dvc commit
+
+# Push to remote storage
+dvc push
+
+# # Git operations (optional, but recommended)
+# echo "Starting Git operations..."
+#
+# # Stage DVC file changes
+# git add data.dvc
+#
+# # Commit DVC file changes
+# git commit -m "Update data: $SCRIPT crawler run on $(date)"
+#
+# # Push Git changes (if you want to push to a Git remote)
+# # git push
+
+echo "DVC operations complete!"
