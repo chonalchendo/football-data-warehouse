@@ -1,0 +1,5 @@
+outs:
+- md5: 9ce060e52d33b318333c084325907aef
+  size: 1275114
+  hash: md5
+  path: squads.json.gz
