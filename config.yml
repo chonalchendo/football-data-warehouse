@@ -10,7 +10,7 @@ transfermarkt_extract:
     TWISTED_REACTOR: "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
     FEED_EXPORT_ENCODING: "utf-8"
     FEEDS:  # Configuration for feed exports
-      'data/%(name)s.json.gz':
+      'data/raw/%(name)s.json.gz':
         format: jsonlines
         overwrite: true  # Overwrite existing files
         encoding: utf-8
