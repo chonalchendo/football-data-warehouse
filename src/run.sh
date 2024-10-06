@@ -9,20 +9,20 @@ PROJECT_DIR="$HOME/Development/football-app/football-data-warehouse"
 # Change to the project directory
 cd "$PROJECT_DIR"
 
-if [ "$#" -ne 5 ]; then
-    echo "Usage: $0 <script>"
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <script> [additional arguments...]"
     echo "You entered $# arguments"
     echo "They were $@"
     exit 1
 fi
 
 SCRIPT=$1
+shift  # Remove the first argument from the argument list
 
+echo "Running $SCRIPT crawler..."
 
-echo "Running $SCRIPT scraper..."
-
-# Run the scraper
-$PYTHON_PATH -m src.extractors.$SCRIPT $2 $3 $4 $5
+# Run the scraper with remaining arguments
+$PYTHON_PATH -m src.extractors.$SCRIPT "$@"
 
 # Print a message when done
-echo "Scraper run complete!"
+echo "Crawler run complete!"
