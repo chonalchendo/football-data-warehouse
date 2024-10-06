@@ -1,0 +1,5 @@
+outs:
+- md5: 4d74d55ccfec8ae075a108d4262627de
+  size: 3419
+  hash: md5
+  path: clubs.json.gz
