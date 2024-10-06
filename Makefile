@@ -20,3 +20,8 @@ help:
 run-transfermarkt-crawler:
 	@echo "Running scraper..."
 	src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
+
+version-transfermarkt-data:
+	@echo "Versioning data..."
+	src/version.sh $(EXTRACT_SCRIPT) 
+
