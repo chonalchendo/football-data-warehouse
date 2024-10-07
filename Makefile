@@ -20,11 +20,11 @@ help:
 	@echo "  make help         : Show this help message"
 
 # Target to run the transfermarkt scraper
-run-transfermarkt-crawler:
+local-transfermarkt-crawler:
 	@echo "Running scraper..."
 	src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
 
-version-transfermarkt-data:
+local-version-transfermarkt:
 	@echo "Versioning data..."
 	src/version.sh $(EXTRACT_SCRIPT) 
 
@@ -33,13 +33,18 @@ docker-build:
 	@echo "Building docker image..."
 	docker build -t $(DOCKER_IMAGE_NAME) .
 
-# Target to run the docker image
-docker-run:
-	@echo "Running docker image..."
-	docker run -it $(DOCKER_IMAGE_NAME)
+# Target to run the docker image with the transfermarkt pipeline
+docker-transfermarkt-crawler:
+	@echo "Running docker transfermarkt pipeline..."
+	docker run -it \
+    -v $(PWD)/data:/app/data \
+		-v $(PWD)/.git:/app/.git \
+		-v $(PWD)/.dvc:/app/.dvc \
+		--env-file .env \
+		$(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
 
 # Target to build and run the docker image
-docker-pipeline: docker-build docker-run
+docker-pipeline: docker-build docker-transfermarkt-crawler
 
 
 
