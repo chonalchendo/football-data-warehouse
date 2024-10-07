@@ -17,6 +17,6 @@ RUN /bin/bash -c "poetry shell"
 
 ADD . /app
 
-RUN chmod +x /app/run.sh
+RUN chmod +x /app/src/run.sh
 
-CMD ["/app/run.sh", "run.sh"]
+CMD ["/bin/bash", "/app/src/run.sh"]
