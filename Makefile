@@ -7,7 +7,7 @@ export
 
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
-ARGS = --crawler squads --season 2018
+ARGS = --crawler squads --season 2024
 DOCKER_IMAGE_NAME = football-data-warehouse
 
 # Help target
@@ -35,7 +35,6 @@ docker-build:
 docker-transfermarkt-crawler:
 	docker run -it \
 		-v $(PWD):/app \
-    -v $(PWD)/.git:/app/.git \
     -v $(LOCAL_GCP_CREDS):$(DOCKER_GCP_CREDS) \
     --env-file .env \
     $(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
@@ -43,4 +42,7 @@ docker-transfermarkt-crawler:
 # Target to build and run the docker image
 docker-pipeline: docker-build docker-transfermarkt-crawler
 
-
+# DVC pull data from gcp 
+dvc_pull:
+	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
+	dvc pull
