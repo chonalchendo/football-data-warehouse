@@ -1,25 +1,23 @@
 # Makefile
-
-# The default goal
 .DEFAULT_GOAL := help
+
+# Load environment variables
+include .env
+export
 
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
-
-# Default arguments
-ARGS = --crawler squads --season all
-
-# Docker image name
+ARGS = --crawler squads --season 2018
 DOCKER_IMAGE_NAME = football-data-warehouse
-
 
 # Help target
 help:
 	@echo "Available commands:"
 	@echo "  make run-transfermarkt-scraper  : Run the Transfermarkt scraper"
-	@echo "  make help         : Show this help message"
+	@echo "  make docker-pipeline            : Build Docker image and run pipeline"
+	@echo "  make help                       : Show this help message"
 
-# Target to run the transfermarkt scraper
+# Target to run the transfermarkt scraper locally
 local-transfermarkt-crawler:
 	@echo "Running scraper..."
 	src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
@@ -35,17 +33,14 @@ docker-build:
 
 # Target to run the docker image with the transfermarkt pipeline
 docker-transfermarkt-crawler:
-	@echo "Running docker transfermarkt pipeline..."
 	docker run -it \
-    -v $(PWD)/data:/app/data \
-		-v $(PWD)/.git:/app/.git \
-		-v $(PWD)/.dvc:/app/.dvc \
-		--env-file .env \
-		$(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
+		-v $(PWD):/app \
+    -v $(PWD)/.git:/app/.git \
+    -v $(LOCAL_GCP_CREDS):$(DOCKER_GCP_CREDS) \
+    --env-file .env \
+    $(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
 
 # Target to build and run the docker image
 docker-pipeline: docker-build docker-transfermarkt-crawler
-
-
 
 
