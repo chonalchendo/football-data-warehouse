@@ -21,13 +21,7 @@ ENV PATH=$PATH:/root/google-cloud-sdk/bin
 RUN git config --global user.email "conalhenderson@gmail.com" && \
     git config --global user.name "Conal Henderson"
 
-# # Set the Google Cloud credentials path
-# ENV GOOGLE_APPLICATION_CREDENTIALS=/app/service-account-key.json
-
 ADD . /app
-
-# # set up dvc remote
-# RUN dvc remote add -d myremote gs://football-data-warehouse/dvcstore
 
 RUN chmod +x /app/src/run.sh
 
