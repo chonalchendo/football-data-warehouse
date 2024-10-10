@@ -7,17 +7,34 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 scrapy = "^2.11.2"
 football-data-extractor = {git = "https://github.com/chonalchendo/football-data-extractor.git", rev = "master"}
 pyyaml = "^6.0.2"
 dvc = {extras = ["gs"], version = "^3.55.2"}
+dagster = "^1.8.10"
+dagster-webserver = "^1.8.10"
+dagit = "^1.8.10"
 
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.13.2"
 black = "^24.8.0"
 
+
+[[tool.poetry.source]]
+name = "grpcio"
+url = "https://github.com/dagster-io/build-grpcio/wiki/Wheels"
+priority = "primary"
+
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "supplemental"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.dagster]
+module_name = 'orchestrator'
