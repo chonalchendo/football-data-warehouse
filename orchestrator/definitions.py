@@ -1,8 +1,10 @@
-from dagster import Definitions
+from dagster import Definitions, define_asset_job
 
-from .assets.transfermarkt import clubs, squads
+from .assets.transfermarkt import squads
 
+transfermarkt_job = define_asset_job(name='transfermarkt', selection='squads')
 
 defs = Definitions(
-        assets=[clubs, squads],
+        assets=[squads],
+        jobs=[transfermarkt_job],
 )
