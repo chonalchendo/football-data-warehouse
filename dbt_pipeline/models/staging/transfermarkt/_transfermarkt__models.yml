@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_transfermarkt__squads
+    columns:
+      - name: tm_id
+        description: "Primary key for the table"
+        data_type: VARCHAR
+        tests:
+          - unique
+          - not_null
