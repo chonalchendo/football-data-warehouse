@@ -1,7 +1,7 @@
-football-data-warehouse:
+football_data_warehouse:
   target: dev
   outputs:
     dev:
       type: duckdb
-      path: ./dbt_pipeline/duckdb 
+      path: duckdb/database.db
       schema: main
