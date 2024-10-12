@@ -46,3 +46,7 @@ docker-pipeline: docker-build docker-transfermarkt-crawler
 dvc_pull:
 	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
 	dvc pull
+
+local-dagster-pipeline:
+	chmod +x orchestrator/scripts/run_local.sh
+	orchestrator/scripts/run_local.sh
