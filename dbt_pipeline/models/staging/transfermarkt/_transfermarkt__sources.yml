@@ -1,14 +1,12 @@
 version: 2
 
 sources:
-  -name: transfermarkt
-  tables:
-    - name: squads
-      meta:
-        external_locations: >
-          read_csv(
-          "../data/raw/transfermarkt/*/squads.json.gz",
-          header=False,
-          columns=struct_pack(value := 'VARCHAR'), delim='\1', quote='\0',
-          filename=True
-          )
+  - name: transfermarkt
+    tables:
+      - name: squads
+        meta:
+          external_location: >
+            read_json(
+            '../data/raw/transfermarkt/*/squads.json.gz',
+            auto_detect=true
+            )
