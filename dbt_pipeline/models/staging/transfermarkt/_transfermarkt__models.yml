@@ -6,6 +6,6 @@ models:
       - name: tm_id
         description: "Primary key for the table"
         data_type: VARCHAR
-        tests:
+        data_tests:
           - unique
           - not_null
