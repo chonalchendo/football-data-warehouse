@@ -47,14 +47,6 @@ clean_signing_fee AS (
     FROM clean_market_values
 ),
 
--- Clean contract expiry
--- clean_contract_expiry AS (
---     SELECT
---         *,
---         CASE WHEN contract_expiry IN ('-', 'NA') THEN NULL ELSE contract_expiry END AS clean_contract_expiry
---     FROM clean_signing_fee
--- ),
-
 -- Clean height
 clean_height AS (
     SELECT
