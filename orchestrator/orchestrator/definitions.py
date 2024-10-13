@@ -1,10 +1,18 @@
-from dagster import Definitions, define_asset_job
+from dagster import Definitions
+from dagster_dbt import DbtCliResource
 
 from .assets.transfermarkt import squads
 
-transfermarkt_job = define_asset_job(name='transfermarkt', selection='squads')
+from .assets.dbt import my_dbt_assets
+from .project import dbt_project
+
+
+resources = {
+    'dbt': DbtCliResource(project_dir=dbt_project),
+}
 
 defs = Definitions(
-        assets=[squads],
-        jobs=[transfermarkt_job],
+        assets=[squads, my_dbt_assets],
+        resources=resources,
 )
+
