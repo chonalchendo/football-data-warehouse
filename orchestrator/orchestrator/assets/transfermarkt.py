@@ -4,9 +4,9 @@ from dagster import MetadataValue, asset, AssetExecutionContext, MaterializeResu
 from src.extractors.transfermarkt import run_spider
 
 
-season = "2025"
+season = "2022"
 
-@asset(description='Club data crawled from Transfermarkt')
+@asset(compute_kind='python', description='Club data crawled from Transfermarkt')
 def clubs(context: AssetExecutionContext) -> None:
     context.log.info('Creating Clubs asset')
     
@@ -15,7 +15,7 @@ def clubs(context: AssetExecutionContext) -> None:
     context.log.info(f'Clubs asset scraped for season {season}')
 
 
-@asset(description='Squad data crawled from Transfermarkt') 
+@asset(compute_kind='python', description='Squad data crawled from Transfermarkt') 
 def squads(context: AssetExecutionContext) -> MaterializeResult:
     context.log.info('Creating Squads asset')
 
