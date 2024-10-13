@@ -5,6 +5,8 @@ sources:
     tables:
       - name: squads
         meta:
+          dagster:
+            asset_key: ['squads']
           external_location: >
             read_json(
             '../data/raw/transfermarkt/*/squads.json.gz',
