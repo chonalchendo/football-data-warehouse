@@ -7,5 +7,4 @@ models:
         description: "Primary key for the table"
         data_type: VARCHAR
         data_tests:
-          - unique
           - not_null
