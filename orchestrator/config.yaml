@@ -1,0 +1,28 @@
+ops:
+  squads:
+    config:
+      season: "2023"
+  # If you have a my_dbt_assets op, you can add its config here if needed
+  # my_dbt_assets:
+  #   config: {}
+
+# If you need to configure resources, you can add them here
+# resources:
+#   dbt:
+#     config:
+#       project_dir: "/path/to/your/dbt/project"
+#   io_manager:
+#     config:
+#       base_dir: "/path/to/your/base/directory"
+
+# If you need to configure loggers, you can add them here
+# loggers:
+#   console:
+#     config:
+#       log_level: "INFO"
+
+# If you need to configure execution, you can add it here
+# execution:
+#   config:
+#     multiprocess:
+#       max_concurrent: 4
