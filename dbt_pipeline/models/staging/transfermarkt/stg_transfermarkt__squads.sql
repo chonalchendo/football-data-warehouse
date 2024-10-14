@@ -80,7 +80,6 @@ SELECT
     age :: INTEGER as age,
     squad,
     dob,
-    age, 
     current_club,
     signed_from,
     clean_position AS position,
