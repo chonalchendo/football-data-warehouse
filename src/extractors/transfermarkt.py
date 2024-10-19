@@ -1,5 +1,3 @@
-import argparse
-
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings
@@ -24,20 +22,3 @@ def run_spider(crawler: str, season: str) -> None:
     process.start()
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--crawler",
-        help="The crawler to run",
-        choices=["clubs", "squads"],
-        required=True,
-    )
-    parser.add_argument(
-        "--season",
-        help="The seasons to crawl",
-        choices=["2018", "2019", "2020", "2021", "2022", "2023", "2024", "all"],
-        required=True,
-    )
-
-    args = parser.parse_args()
-    run_spider(**vars(args))
