@@ -4,3 +4,8 @@ dbt_packages/
 logs/
 models/example/
 .user.yml
+duckdb/database.db
+macros/
+snapshots/ 
+seeds/
+analyses/

@@ -5,3 +5,11 @@ __pycache__/
 .venv/
 
 .env
+
+**/.terraform/*
+**/terraform.tfstate
+**/.terraform.tfstate.backup
+**/.terraform.lock.hcl
+**/creds.tf
+
+notebooks/
