@@ -17,3 +17,10 @@ transfermarkt_extract:
         postprocessing: 
           - scrapy.extensions.postprocessing.GzipPlugin  # Use Gzip for compression
 
+fbref_extract:
+  custom_config:
+    COLLECTOR_MODULES: ['fbref']
+    FEEDS: 
+      path: 'data/raw/fbref/{season}/{name}.json.gz'
+      overwrite: true  # Overwrite existing files
+      encoding: utf-8
