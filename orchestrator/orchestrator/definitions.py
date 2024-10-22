@@ -3,6 +3,7 @@ from dagster_dbt import DbtCliResource
 
 from .assets.dbt import my_dbt_assets
 from .assets.transfermarkt import squads
+from .assets.fbref import player_defense 
 from .project import dbt_project
 
 resources = {
@@ -10,6 +11,6 @@ resources = {
 }
 
 defs = Definitions(
-    assets=[squads, my_dbt_assets],
+    assets=[squads, player_defense, my_dbt_assets],
     resources=resources,
 )
