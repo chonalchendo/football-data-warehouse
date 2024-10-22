@@ -54,3 +54,6 @@ local-dagster-pipeline:
 local-dagster-dev:
 	dagster dev -m orchestrator.orchestrator
 
+local-dagster-dbt:
+	poetry run dagster job execute -m orchestrator.orchestrator --config orchestrator/config.yaml    
+
