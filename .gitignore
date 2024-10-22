@@ -13,3 +13,4 @@ __pycache__/
 **/creds.tf
 
 notebooks/
+logs/
