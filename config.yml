@@ -21,6 +21,7 @@ fbref_extract:
   custom_config:
     COLLECTOR_MODULES: ['fbref']
     FEEDS: 
-      path: 'data/raw/fbref/{season}/{name}.json.gz'
-      overwrite: true  # Overwrite existing files
+      path: 'data/raw/fbref/{season}/{name}.parquet'
+      overwrite: True # Overwrite existing files
       encoding: utf-8
+      format: 'parquet'
