@@ -57,8 +57,8 @@ local-dagster-dev:
 local-run-dagster-dbt:
 	poetry run dagster job execute -m orchestrator.orchestrator --config orchestrator/config.yaml    
 
-local-run-dagster-dbt-asset:
-	poetry run dagster job execute -m orchestrator.orchestrator.assets.fbref.player_defense --config orchestrator/config.yaml
+local-run-dagster-fbref-asset:
+	poetry run dagster job execute -m orchestrator.orchestrator.assets.fbref.$(ASSET) --config orchestrator/config.yaml
 
 dbt-build:
 	cd dbt_pipeline && dbt build
