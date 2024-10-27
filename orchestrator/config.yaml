@@ -2,6 +2,11 @@ ops:
   squads:
     config:
       season: "2023"
+
+ops:
+  player_defense:
+    config:
+      season: "2023"
   # If you have a my_dbt_assets op, you can add its config here if needed
   # my_dbt_assets:
   #   config: {}
