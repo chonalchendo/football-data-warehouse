@@ -1,4 +1,4 @@
-import pandas as pd
+import polars as pl
 from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
                      asset)
 
@@ -17,13 +17,13 @@ def player_defense(
 
     context.log.info(f"Defensive Stats asset scraped for season {config.season}")
 
-    output_path = f"data/raw/fbref/{config.season}/{FbrefCollector.DEFENSE}.json.gz"
-    df = pd.read_json(output_path, lines=True)
+    output_path = f"data/raw/fbref/{config.season}/{FbrefCollector.DEFENSE}.parquet"
+    df = pl.read_parquet(output_path)
 
     return MaterializeResult(
         metadata={
-            "num_records": len(df),
+            "num_records": df.shape[0],
             "season": config.season,
-            "preview": MetadataValue.md(df.head().to_markdown()),
+            "preview": MetadataValue.md(df.to_pandas().head().to_markdown()),
         }
     )
