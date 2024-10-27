@@ -1,4 +1,5 @@
 from utils import read_config
+import argparse
 
 from fbref.fbref import NavigatorRunner, Settings 
 
@@ -19,7 +20,10 @@ def run_crawler(collector: str, season: str) -> None:
     runner.start()
 
 if __name__ == "__main__":
-    settings = get_crawler_settings()
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("--collector", type=str, required=True)
+    arg_parser.add_argument("--season", type=str, required=True)
+    args = arg_parser.parse_args()
 
-    run_crawler(collector='player_passing', season='2021')
+    run_crawler(collector=args.collector, season=args.season)
 
