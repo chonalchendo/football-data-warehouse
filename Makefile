@@ -7,7 +7,7 @@ export
 
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
-ARGS = --crawler squads --season 2024
+TRANSFERMARKT_ARGS = --crawler squads --season 2024
 DOCKER_IMAGE_NAME = football-data-warehouse
 
 # Help target
@@ -20,7 +20,7 @@ help:
 # Target to run the transfermarkt scraper locally
 local-transfermarkt-crawler:
 	@echo "Running scraper..."
-	src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
+	src/run.sh $(EXTRACT_SCRIPT) $(TRANSFERMARKT_ARGS)
 
 local-version-transfermarkt:
 	@echo "Versioning data..."
@@ -37,7 +37,7 @@ docker-transfermarkt-crawler:
 		-v $(PWD):/app \
     -v $(LOCAL_GCP_CREDS):$(DOCKER_GCP_CREDS) \
     --env-file .env \
-    $(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(ARGS)
+    $(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(TRANSFERMARKT_ARGS)
 
 # Target to build and run the docker image
 docker-pipeline: docker-build docker-transfermarkt-crawler
@@ -57,3 +57,9 @@ local-dagster-dev:
 local-dagster-dbt:
 	poetry run dagster job execute -m orchestrator.orchestrator --config orchestrator/config.yaml    
 
+
+dbt-build:
+	cd dbt_pipeline && dbt build
+
+dbt-compile:
+	cd dbt_pipeline && dbt compile
