@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: country_data
+    tables:
+      - name: fifa_country_catalogue
+        meta:
+          dagster:
+            asset_key: ['fifa_country_catalogue']
+          external_location: >
+            read_parquet(
+            '../data/fifa_country_catalogue.parquet'
+            )
+
+  - name: fbref
+    tables:
+      - name: player_defense 
+        meta:
+          dagster:
+            asset_key: ['player_defense']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_defense.parquet'
+            )
+ 
+

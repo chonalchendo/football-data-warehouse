@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_fbref__player_defense
+    # columns:
+    #   - name: tm_id
+    #     description: "Primary key for the table"
+    #     data_type: VARCHAR
+    #     data_tests:
+ 
