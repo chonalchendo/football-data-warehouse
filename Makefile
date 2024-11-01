@@ -60,6 +60,10 @@ local-run-dagster-dbt:
 local-run-dagster-fbref-asset:
 	poetry run dagster job execute -m orchestrator.orchestrator.assets.fbref.$(ASSET) --config orchestrator/config.yaml
 
+
+dagster-run-asset:
+	poetry run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASONS) 
+
 dbt-build:
 	cd dbt_pipeline && dbt build
 
