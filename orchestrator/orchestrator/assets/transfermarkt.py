@@ -1,6 +1,11 @@
 import pandas as pd
-from dagster import (AssetExecutionContext, Config, MaterializeResult,
-                     MetadataValue, asset)
+from dagster import (
+    AssetExecutionContext,
+    Config,
+    MaterializeResult,
+    MetadataValue,
+    asset,
+)
 
 from src.extractors.transfermarkt import run_spider
 
