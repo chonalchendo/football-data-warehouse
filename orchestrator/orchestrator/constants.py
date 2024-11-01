@@ -1,4 +1,4 @@
-from dagster import Config
+from dagster import Config, StaticPartitionsDefinition
 
 
 class FbrefConfig(Config):
@@ -19,3 +19,6 @@ fbrefcollectors = [
     'player_gca'
 ]
 
+
+seasons = ['2018', '2019', '2020', '2021', '2022', '2023']
+season_partitions = StaticPartitionsDefinition(seasons)
