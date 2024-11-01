@@ -6,6 +6,7 @@ authors = ["chonalchendo <110059232+chonalchendo@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
 
+
 [tool.poetry.dependencies]
 python = ">=3.12,<3.13"
 scrapy = "^2.11.2"
@@ -22,6 +23,7 @@ ipython-sql = "^0.5.0"
 dagster-dbt = "^0.24.11"
 pycountry = "^24.6.1"
 pycountry-convert = "^0.7.2"
+pytest = "^8.3.3"
 
 
 [tool.poetry.group.dev.dependencies]
