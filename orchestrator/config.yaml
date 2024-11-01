@@ -1,12 +1,67 @@
+# vars:
+#   season = "2023"
+#
+#
 ops:
   squads:
     config:
-      season: "2023"
+      season: "2023" 
 
+# ops:
+#   player_defense:
+#     config:
+#       season: ${vars.season} 
+#
 ops:
-  player_defense:
+  player_shooting:
     config:
       season: "2023"
+
+# ops:
+#   player_playing_time:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_gca:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_possession:
+#     config:
+#       season: ${vars.season}
+#   
+# ops:
+#   player_passing:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_misc:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_keeper:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_keeper_adv:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_pass_types:
+#     config:
+#       season: ${vars.season}
+#
+# ops:
+#   player_standard_stats:
+#     config:
+#       season: ${vars.season}
+
   # If you have a my_dbt_assets op, you can add its config here if needed
   # my_dbt_assets:
   #   config: {}

@@ -20,5 +20,3 @@ def run_spider(crawler: str, season: str) -> None:
     process = CrawlerProcess(settings)
     process.crawl(crawler, season=season)
     process.start()
-
-

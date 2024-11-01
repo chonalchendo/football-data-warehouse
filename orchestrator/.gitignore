@@ -1,1 +1,3 @@
 artifacts/
+.logs_queue/
+.nux/

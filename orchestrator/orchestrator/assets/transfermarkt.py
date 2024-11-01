@@ -1,6 +1,6 @@
 import pandas as pd
-from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
-                     asset, Config)
+from dagster import (AssetExecutionContext, Config, MaterializeResult,
+                     MetadataValue, asset)
 
 from src.extractors.transfermarkt import run_spider
 
@@ -19,7 +19,9 @@ def clubs(context: AssetExecutionContext, config: TransfermarktConfig) -> None:
 
 
 @asset(compute_kind="python", description="Squad data crawled from Transfermarkt")
-def squads(context: AssetExecutionContext, config: TransfermarktConfig) -> MaterializeResult:
+def squads(
+    context: AssetExecutionContext, config: TransfermarktConfig
+) -> MaterializeResult:
     context.log.info("Creating Squads asset")
 
     run_spider("squads", config.season)

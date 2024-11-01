@@ -1,7 +1,7 @@
 import pandas as pd
-import requests
 import pycountry
 import pycountry_convert as pc
+import requests
 from bs4 import BeautifulSoup
 
 

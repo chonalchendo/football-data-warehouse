@@ -1,5 +1,6 @@
 import polars as pl
-from dagster import AssetExecutionContext, MaterializeResult, MetadataValue, asset
+from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
+                     asset)
 
 from src.extractors.fbref import run_crawler
 

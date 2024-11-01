@@ -1,10 +1,10 @@
-import polars as pl
 from pathlib import Path
 
+import polars as pl
 from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
                      asset)
 
-from src.extractors.seeds import get_fifa_codes, get_continent_name
+from src.extractors.seeds import get_continent_name, get_fifa_codes
 
 
 @asset(compute_kind="python", description="FIFA country codes")
@@ -29,7 +29,6 @@ def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
         continent_name = get_continent_name(name)
         country_dict = {"code": code, "name": name, "continent": continent_name}
         data.append(country_dict)
-        
 
     df = pl.DataFrame(data)
 
@@ -42,5 +41,3 @@ def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
             "preview": MetadataValue.md(df.to_pandas().head().to_markdown()),
         }
     )
-
-
