@@ -1873,6 +1873,7 @@ develop = false
 [package.dependencies]
 beautifulsoup4 = "^4.12.3"
 black = "^24.8.0"
+gcsfs = "^2024.10.0"
 httpx = "^0.27.2"
 pandas = "^2.2.3"
 polars = "^1.6.0"
@@ -1885,7 +1886,7 @@ scrapy = "^2.11.2"
 type = "git"
 url = "https://github.com/chonalchendo/football-data-extractor.git"
 reference = "master"
-resolved_reference = "e7d021b236cc1831c71a7f4b30722eb469768a79"
+resolved_reference = "0c9b3d00fe117a7b068ab281ddd669dcf1d573fa"
 
 [[package]]
 name = "frozenlist"
@@ -4607,6 +4608,26 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pydantic-settings"
+version = "2.6.1"
+description = "Settings management using Pydantic"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pydantic_settings-2.6.1-py3-none-any.whl", hash = "sha256:7fb0637c786a558d3103436278a7c4f1cfd29ba8973238a50c5bb9a55387da87"},
+    {file = "pydantic_settings-2.6.1.tar.gz", hash = "sha256:e0f92546d8a9923cb8941689abf85d6601a8c19a23e97a34b2964a2e3f813ca0"},
+]
+
+[package.dependencies]
+pydantic = ">=2.7.0"
+python-dotenv = ">=0.21.0"
+
+[package.extras]
+azure-key-vault = ["azure-identity (>=1.16.0)", "azure-keyvault-secrets (>=4.8.0)"]
+toml = ["tomli (>=2.0.1)"]
+yaml = ["pyyaml (>=6.0.1)"]
+
+[[package]]
 name = "pydispatcher"
 version = "2.0.7"
 description = "Multi-producer multi-consumer in-memory signal dispatch system"
@@ -6676,4 +6697,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "13c4cb4970607262aac8cb4ae34e6b38af503706fea1842b498f31e248b48619"
+content-hash = "7e154fe4fa62edb892a0d7c2a9d2804fd02e9b7b50fa30bbd7eede6821c56903"
