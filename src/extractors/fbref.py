@@ -1,23 +1,19 @@
 import argparse
 
-from fbref.fbref import NavigatorRunner, Settings
+from fbref.fbref import NavigatorRunner, GcsFeed
 
-from utils import read_config
-
-
-def get_crawler_settings() -> Settings:
-    config = read_config()
-
-    settings = Settings()
-    crawler_settings: dict = config["fbref_extract"]["custom_config"]
-
-    settings.setdict(crawler_settings)
-    return settings
+from .settings import get_config
 
 
 def run_crawler(collector: str, season: str) -> None:
-    settings = get_crawler_settings()
-    runner = NavigatorRunner(settings)
+    settings = get_config().fbref_extract
+    gcs_feed = GcsFeed(
+        output_path=settings.FEEDS.PATH,
+        format=settings.FEEDS.FORMAT,
+        gcs_project_name=settings.GCP_PROJECT,
+        gcs_credentials=settings.GCP_CREDENTIALS_PATH,
+    )
+    runner = NavigatorRunner(feed=gcs_feed)
     runner.navigate(collector=collector, season=season)
     runner.start()
 
