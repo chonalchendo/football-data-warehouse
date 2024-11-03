@@ -14,3 +14,5 @@ __pycache__/
 
 notebooks/
 logs/
+
+.pytest_cache/
