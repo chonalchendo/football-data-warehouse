@@ -13,11 +13,14 @@ transfermarkt_assets = load_assets_from_modules(
     [transfermarkt], group_name="transfermarkt"
 )
 
-resources = {
+dbt_local_resource = DbtCliResource(project_dir=dbt_project, target="local")
+
+
+RESOURCES = {
     "dbt": DbtCliResource(project_dir=dbt_project),
 }
 
 defs = Definitions(
     assets=[*transfermarkt_assets, *fbref_assets, *seed_assets, my_dbt_assets],
-    resources=resources,
+    resources=RESOURCES,
 )
