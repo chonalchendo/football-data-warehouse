@@ -25,6 +25,8 @@ pycountry = "^24.6.1"
 pycountry-convert = "^0.7.2"
 pytest = "^8.3.3"
 pydantic-settings = "^2.6.1"
+black = "^24.10.0"
+isort = "^5.13.2"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,6 +1,6 @@
 import argparse
 
-from fbref.fbref import NavigatorRunner, GcsFeed
+from fbref.fbref import GcsFeed, NavigatorRunner
 
 from .settings import get_config
 

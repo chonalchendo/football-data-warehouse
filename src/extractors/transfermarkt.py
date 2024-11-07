@@ -1,7 +1,7 @@
+from rich import print
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings
-from rich import print
 
 from .settings import get_config
 
@@ -11,7 +11,7 @@ def set_scrapy_settings() -> Settings:
     config = get_config()
 
     scrapy_settings = config.transfermarkt_extract.model_dump(exclude=None)
-    
+
     print(scrapy_settings)
 
     settings.setdict(scrapy_settings)
