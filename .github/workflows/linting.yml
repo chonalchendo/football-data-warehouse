@@ -58,7 +58,18 @@ jobs:
       #              run linting
       #----------------------------------------------
       - name: Run isort
-        run: poetry run isort . --check-only --diff
+        run: poetry run isort . 
 
       - name: Run black
-        run: poetry run black . --check --diff
+        run: poetry run black . 
+
+      #----------------------------------------------
+      #              commit linted files
+      #----------------------------------------------
+      - name: Commit linted files
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: '.'
+          message: '🤖 Apply code formatting'
+          default_author: github_actions
+          pull: '--no-rebase'
