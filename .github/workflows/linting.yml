@@ -53,7 +53,7 @@ jobs:
       # install your root project, if required
       #----------------------------------------------
       - name: Install project
-        run: poetry install black isort 
+        run: poetry add black isort 
       #----------------------------------------------
       #              run linting
       #----------------------------------------------
