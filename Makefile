@@ -43,7 +43,7 @@ docker-build:
 
 docker-login-dockerhub:
 	@echo "Logging in to DockerHub with token"
-	@echo ${DOCKERHUB_TOKEN}	| docker login --username chonalchendo --password-stdin
+	@echo ${DOCKER_TOKEN}	| docker login --username chonalchendo --password-stdin
 
 docker-push-dockerhub: docker-build docker-login-dockerhub
 	@echo "Pushing docker image..."
