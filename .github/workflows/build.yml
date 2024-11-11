@@ -16,4 +16,6 @@ jobs:
         env:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          make docker-build docker-push-dockerhub 
+          make docker-push-dockerhub 
+
+
