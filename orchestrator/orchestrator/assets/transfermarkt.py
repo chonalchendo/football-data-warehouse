@@ -24,9 +24,7 @@ def clubs(context: AssetExecutionContext, config: TransfermarktConfig) -> None:
 
 
 @asset(compute_kind="python", description="Squad data crawled from Transfermarkt")
-def squads(
-    context: AssetExecutionContext, config: TransfermarktConfig
-) -> MaterializeResult:
+def squads(context: AssetExecutionContext, config: TransfermarktConfig) -> MaterializeResult:
     context.log.info("Creating Squads asset")
 
     run_spider("squads", config.season)

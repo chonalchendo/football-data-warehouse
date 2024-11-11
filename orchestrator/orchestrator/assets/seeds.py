@@ -1,7 +1,12 @@
 from pathlib import Path
 
 import polars as pl
-from dagster import AssetExecutionContext, MaterializeResult, MetadataValue, asset
+from dagster import (
+    AssetExecutionContext,
+    MaterializeResult,
+    MetadataValue,
+    asset,
+)
 
 from src.extractors.seeds import get_continent_name, get_fifa_codes
 
@@ -10,11 +15,7 @@ from src.extractors.seeds import get_continent_name, get_fifa_codes
 def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
     context.log.info("Creating FIFA country codes asset")
 
-    seeds_path = (
-        Path(__file__).parent.parent.parent.parent
-        / "data"
-        / "fifa_country_catalogue.parquet"
-    ).resolve()
+    seeds_path = (Path(__file__).parent.parent.parent.parent / "data" / "fifa_country_catalogue.parquet").resolve()
 
     if not seeds_path.exists():
         seeds_path.parent.mkdir(parents=True, exist_ok=True)

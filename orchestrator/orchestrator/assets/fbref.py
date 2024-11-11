@@ -1,5 +1,10 @@
 import polars as pl
-from dagster import AssetExecutionContext, MaterializeResult, MetadataValue, asset
+from dagster import (
+    AssetExecutionContext,
+    MaterializeResult,
+    MetadataValue,
+    asset,
+)
 
 from src.extractors.fbref import run_crawler
 
@@ -24,9 +29,7 @@ def generate_fbref_asset(collector: str):
 
         context.log.info(f"Keeper stats asset scraped for season {season}")
 
-        output_path = (
-            f"gs://football-data-warehouse/raw/fbref/{season}/{collector}.parquet"
-        )
+        output_path = f"gs://football-data-warehouse/raw/fbref/{season}/{collector}.parquet"
         df = pl.read_parquet(output_path, storage_options=get_gcs_storage_options())
 
         return MaterializeResult(
