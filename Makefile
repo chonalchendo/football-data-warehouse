@@ -2,9 +2,9 @@
 .DEFAULT_GOAL := help
 
 # Load environment variables
-include .env
-export
-
+# include .env
+# export
+#
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
 TRANSFERMARKT_ARGS = --crawler squads --season 2024
