@@ -9,8 +9,8 @@
 EXTRACT_SCRIPT ?= transfermarkt 
 TRANSFERMARKT_ARGS = --crawler squads --season 2024
 DOCKER_IMAGE_NAME = chonalchendo/football-data-warehouse
-PLATFORM ?= linux/arm64
-PLATFORM_TAG ?= linux-arm64
+PLATFORM ?= linux/amd64
+PLATFORM_TAG ?= linux-amd64
 TAG ?= master
 IMAGE_TAG = $(PLATFORM_TAG)-$(TAG)
 
