@@ -36,16 +36,16 @@ local-version-transfermarkt:
 	@echo "Versioning data..."
 	src/version.sh $(EXTRACT_SCRIPT) 
 
-docker-login-dockerhub:
-	@echo "Logging in to DockerHub with token"
-	@echo ${DOCKER_TOKEN}	| docker login --username chonalchendo --password-stdin
-
 # Target to build the docker image
 docker-build:
 	@echo "Building docker image..."
 	docker build --platform=$(PLATFORM) -t $(DOCKER_IMAGE_NAME):$(IMAGE_TAG) .
 
-docker-push: docker-build docker-login-dockerhub
+docker-login-dockerhub:
+	@echo "Logging in to DockerHub with token"
+	@echo ${DOCKER_TOKEN}	| docker login --username chonalchendo --password-stdin
+
+docker-push-dockerhub: docker-build docker-login-dockerhub
 	@echo "Pushing docker image..."
 	docker push $(DOCKER_IMAGE_NAME):$(IMAGE_TAG)
 
