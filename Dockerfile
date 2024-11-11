@@ -13,18 +13,13 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-root
 
-# Install Google Cloud SDK
-RUN curl -sSL https://sdk.cloud.google.com | bash
-ENV PATH=$PATH:/root/google-cloud-sdk/bin
 
-# Set up Git configuration (replace with your details)
-RUN git config --global user.email "conalhenderson@gmail.com" && \
-    git config --global user.name "Conal Henderson"
+# Set up Git configuration 
+RUN git config --global user.email "football-data-warehouse-ci@football-data-warehouse.dev" && \
+    git config --global user.name "CI Job" && \
+    git config --global core.sshCommand "ssh -o StrictHostKeyChecking=no" 
 
-ADD . /app
+ADD src/bootstrap.sh /app
 
-RUN chmod +x /app/src/run.sh
-
-CMD ["/bin/bash"]
-
+ENTRYPOINT ["/bin/bash", "/app/bootstrap.sh"]
 
