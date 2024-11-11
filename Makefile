@@ -8,7 +8,11 @@ export
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
 TRANSFERMARKT_ARGS = --crawler squads --season 2024
-DOCKER_IMAGE_NAME = football-data-warehouse
+DOCKER_IMAGE_NAME = chonalchendo/football-data-warehouse
+PLATFORM ?= linux/arm64
+PLATFORM_TAG ?= linux-arm64
+TAG ?= master
+IMAGE_TAG = $(PLATFORM_TAG)-$(TAG)
 
 # Help target
 help:
@@ -16,6 +20,12 @@ help:
 	@echo "  make run-transfermarkt-scraper  : Run the Transfermarkt scraper"
 	@echo "  make docker-pipeline            : Build Docker image and run pipeline"
 	@echo "  make help                       : Show this help message"
+
+
+format:
+	@echo "Running formatter"
+	black .
+	isort .
 
 # Target to run the transfermarkt scraper locally
 local-transfermarkt-crawler:
@@ -26,10 +36,18 @@ local-version-transfermarkt:
 	@echo "Versioning data..."
 	src/version.sh $(EXTRACT_SCRIPT) 
 
+docker-login-dockerhub:
+	@echo "Logging in to DockerHub with token"
+	@echo ${DOCKER_TOKEN}	| docker login --username chonalchendo --password-stdin
+
 # Target to build the docker image
 docker-build:
 	@echo "Building docker image..."
-	docker build -t $(DOCKER_IMAGE_NAME) .
+	docker build --platform=$(PLATFORM) -t $(DOCKER_IMAGE_NAME):$(IMAGE_TAG) .
+
+docker-push: docker-build docker-login-dockerhub
+	@echo "Pushing docker image..."
+	docker push $(DOCKER_IMAGE_NAME):$(IMAGE_TAG)
 
 # Target to run the docker image with the transfermarkt pipeline
 docker-transfermarkt-crawler:
