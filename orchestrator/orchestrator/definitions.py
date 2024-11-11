@@ -9,7 +9,9 @@ from .project import dbt_project
 
 fbref_assets = [generate_fbref_asset(collector) for collector in fbrefcollectors]
 seed_assets = load_assets_from_modules([seeds], group_name="seeds")
-transfermarkt_assets = load_assets_from_modules([transfermarkt], group_name="transfermarkt")
+transfermarkt_assets = load_assets_from_modules(
+    [transfermarkt], group_name="transfermarkt"
+)
 
 dbt_local_resource = DbtCliResource(project_dir=dbt_project, target="local")
 
