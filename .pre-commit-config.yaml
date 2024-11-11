@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: format
+        name: format
+        entry: make
+        args: ["format"]
+        language: system
+        pass_filenames: false
