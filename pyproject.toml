@@ -12,7 +12,7 @@ python = ">=3.12,<3.13"
 scrapy = "^2.11.2"
 football-data-extractor = {git = "https://github.com/chonalchendo/football-data-extractor.git", rev = "master"}
 pyyaml = "^6.0.2"
-dvc = {extras = ["gs"], version = "^3.55.2"}
+dvc = {extras = ["s3"], version = "^3.56.0"}
 dagster = "^1.8.10"
 dagster-webserver = "^1.8.10"
 dagit = "^1.8.10"
