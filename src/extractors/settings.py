@@ -19,10 +19,17 @@ class TransfermarktConfig(BaseSettings):
     FEED_EXPORT_ENCODING: str = "utf-8"
     ITEM_PIPELINES: dict[str, int] = Field(
         default_factory=lambda: {
-            "transfermarkt.transfermarkt.pipelines.TransfermarktGCSPipeline": 300
+            "transfermarkt.transfermarkt.pipelines.TransfermarktParquetPipeline": 300
         }
     )
     FEEDS: dict[str, Any] = Field(
+        default_factory=lambda: {
+            "data/raw/transfermarkt/{season}/{name}.parquet": {
+                "format": "parquet" 
+            }
+        }
+    )
+    GCS_FEEDS: dict[str, Any] = Field(
         default_factory=lambda: {
             "gs://football-data-warehouse/raw/transfermarkt/{season}/{name}.parquet": {
                 "format": "parquet"
@@ -41,7 +48,7 @@ class TransfermarktConfig(BaseSettings):
 
 
 class Feeds(BaseModel):
-    PATH: str = "gs://football-data-warehouse/raw/fbref/{season}/{name}.parquet"
+    PATH: str = "data/raw/fbref/{season}/{name}.parquet"
     OVERWRITE: bool = True
     ENCODING: str = "utf-8"
     FORMAT: str = "parquet"
