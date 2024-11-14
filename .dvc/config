@@ -1,4 +1,0 @@
-[core]
-    remote = gcs
-['remote "gcs"']
-    url = gs://football-data-warehouse/dvcstore
