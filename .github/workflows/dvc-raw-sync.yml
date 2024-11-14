@@ -1,7 +1,7 @@
 name: DVC raw data sync
 
 on:
-  push:
+  watch:
     paths:
       - 'data/raw/**'
 
