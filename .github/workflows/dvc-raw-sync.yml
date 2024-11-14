@@ -1,0 +1,41 @@
+name: DVC raw data sync
+
+on:
+  push:
+    paths:
+      - 'data/raw/**'
+
+jobs:
+  sync-raw-data:
+    runs-on: ubuntu-latest
+    container:
+      image: chonalchendo/football-data-warehouse:linux-amd64-master
+    defaults:
+      shell: bash -l {0}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+
+    - name: DVC remove old data
+      run: |
+        dvc remove data/raw/*.dvc || true
+    - name: DVC add new data
+      run: |
+        dvc add data/raw/fbref
+        dvc add data/raw/transfermarkt
+    - name: DVC commit and push
+      run: |
+        dvc commit -f && dvc push --remote s3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - uses: EndBug/add-and-commit@v9
+      with:
+        add: 'data/raw/*.dvc data/raw/.gitignore'
+        message: "🤖 Update raw data: $(git log --format=%cd --date=format:'%Y-%m-%d %H:%M:%S' -n 1)"
+        default_author: github_actions
+    - name: Pull updates with no rebase
+      run: git pull --no-rebase
+
