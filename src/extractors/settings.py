@@ -24,9 +24,7 @@ class TransfermarktConfig(BaseSettings):
     )
     FEEDS: dict[str, Any] = Field(
         default_factory=lambda: {
-            "data/raw/transfermarkt/{season}/{name}.parquet": {
-                "format": "parquet" 
-            }
+            "data/raw/transfermarkt/{season}/{name}.parquet": {"format": "parquet"}
         }
     )
     GCS_FEEDS: dict[str, Any] = Field(
@@ -57,6 +55,13 @@ class Feeds(BaseModel):
 class FBRefSettings(BaseSettings):
     COLLECTOR_MODULES: list[str] = ["fbref"]
     FEEDS: Feeds = Field(default_factory=Feeds)
+    COMPS: dict[str, int] = {
+        "Premier-League": 9,
+        "Serie-A": 11,
+        "La-Liga": 12,
+        "Bundesliga": 20,
+        "Ligue-1": 13,
+    }
 
     model_config = SettingsConfigDict(
         env_file=".env",
