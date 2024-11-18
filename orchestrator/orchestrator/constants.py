@@ -1,11 +1,7 @@
-from dagster import Config, StaticPartitionsDefinition
+from dagster import StaticPartitionsDefinition
 
 
-class FbrefConfig(Config):
-    season: str
-
-
-fbrefcollectors = [
+FBREF_STATS_COLLECTORS = [
     "player_defense",
     "player_misc",
     "player_passing",
@@ -20,5 +16,5 @@ fbrefcollectors = [
 ]
 
 
-seasons = ["2018", "2019", "2020", "2021", "2022", "2023"]
-season_partitions = StaticPartitionsDefinition(seasons)
+SEASONS = ["2018", "2019", "2020", "2021", "2022", "2023"]
+SEASON_PARTITIONS = StaticPartitionsDefinition(SEASONS)
