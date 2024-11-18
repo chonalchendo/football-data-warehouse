@@ -1,44 +1,49 @@
-import pandas as pd
+import polars as pl
 from dagster import (
     AssetExecutionContext,
-    Config,
     MaterializeResult,
     MetadataValue,
     asset,
 )
 
 from src.extractors.transfermarkt import run_spider
+from ..constants import SEASON_PARTITIONS
 
 
-class TransfermarktConfig(Config):
-    season: str
+@asset(
+    compute_kind="python",
+    description="Club data crawled from Transfermarkt",
+    partitions_def=SEASON_PARTITIONS,
+)
+def clubs(context: AssetExecutionContext) -> None:
+    season = context.partition_key
+    context.log.info(f"Creating Clubs asset for season {season}")
+
+    run_spider("clubs", season)
+
+    context.log.info(f"Clubs asset scraped for season {season}")
 
 
-@asset(compute_kind="python", description="Club data crawled from Transfermarkt")
-def clubs(context: AssetExecutionContext, config: TransfermarktConfig) -> None:
-    context.log.info("Creating Clubs asset")
+@asset(
+    compute_kind="python",
+    description="Squad data crawled from Transfermarkt",
+    partitions_def=SEASON_PARTITIONS,
+)
+def squads(context: AssetExecutionContext) -> MaterializeResult:
+    season = context.partition_key
+    context.log.info(f"Creating Squads asset for season {season}")
 
-    run_spider("clubs", config.season)
+    run_spider("squads", season)
 
-    context.log.info(f"Clubs asset scraped for season {config.season}")
+    context.log.info(f"Squads asset scraped for season {season}")
 
-
-@asset(compute_kind="python", description="Squad data crawled from Transfermarkt")
-def squads(context: AssetExecutionContext, config: TransfermarktConfig) -> MaterializeResult:
-    context.log.info("Creating Squads asset")
-
-    run_spider("squads", config.season)
-
-    context.log.info(f"Squads asset scraped for season {config.season}")
-
-    output_path = f"data/raw/transfermarkt/{config.season}/squads.json.gz"
-
-    df = pd.read_json(output_path, lines=True)
+    output_path = f"data/raw/transfermarkt/{season}/squads.parquet"
+    df = pl.read_parquet(output_path)
 
     return MaterializeResult(
         metadata={
-            "num_records": len(df),
-            "season": config.season,
-            "preview": MetadataValue.md(df.head().to_markdown()),
+            "records": len(df),
+            "season": season,
+            "preview": MetadataValue.md(df.to_pandas().head().to_markdown()),
         }
     )
