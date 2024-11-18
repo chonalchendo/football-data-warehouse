@@ -69,7 +69,7 @@ local-dagster-pipeline:
 	chmod +x orchestrator/scripts/run_local.sh
 	orchestrator/scripts/run_local.sh
 
-local-dagster-dev:
+dagster-dev:
 	dagster dev -m orchestrator.orchestrator
 
 local-run-dagster-dbt:
