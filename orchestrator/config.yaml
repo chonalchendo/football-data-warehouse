@@ -82,7 +82,5 @@ ops:
 #       log_level: "INFO"
 
 # If you need to configure execution, you can add it here
-# execution:
-#   config:
-#     multiprocess:
-#       max_concurrent: 4
+execution:
+  in_process:
