@@ -1,6 +1,3 @@
-from dagster import StaticPartitionsDefinition
-
-
 FBREF_STATS_COLLECTORS = [
     "player_defense",
     "player_misc",
@@ -16,5 +13,5 @@ FBREF_STATS_COLLECTORS = [
 ]
 
 
-SEASONS = ["2018", "2019", "2020", "2021", "2022", "2023"]
-SEASON_PARTITIONS = StaticPartitionsDefinition(SEASONS)
+TMARKET_LEAGUES = ["premier-league", "la-liga", "bundesliga", "serie-a", "ligue-1"]
+FBREF_LEAGUES = ["Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1"]
