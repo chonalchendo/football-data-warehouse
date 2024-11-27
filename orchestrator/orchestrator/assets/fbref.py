@@ -8,8 +8,9 @@ from dagster import (
 
 from src.extractors.fbref import run_stats_crawler, run_wage_crawler
 from src.extractors.settings import get_config
+import time
 
-from ..constants import SEASON_PARTITIONS
+from ..partitions import SEASON_PARTITIONS
 
 
 def generate_fbref_stat_asset(collector: str):
@@ -24,7 +25,7 @@ def generate_fbref_stat_asset(collector: str):
         season = context.partition_key
 
         context.log.info(f"Creating {collector} asset for season {season}")
-
+        time.sleep(5)
         run_stats_crawler(collector, season)
 
         context.log.info(f"Keeper stats asset scraped for season {season}")
