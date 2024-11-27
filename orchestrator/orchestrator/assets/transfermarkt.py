@@ -6,8 +6,8 @@ from dagster import (
     asset,
 )
 
-from src.extractors.transfermarkt import run_spider
-from ..constants import SEASON_PARTITIONS
+from src.extractors.transfermarkt import run_clubs_spider, run_squads_spider
+from ..partitions import SEASON_PARTITIONS
 
 
 @asset(
@@ -19,7 +19,7 @@ def clubs(context: AssetExecutionContext) -> None:
     season = context.partition_key
     context.log.info(f"Creating Clubs asset for season {season}")
 
-    run_spider("clubs", season)
+    run_clubs_spider("clubs", season)
 
     context.log.info(f"Clubs asset scraped for season {season}")
 
@@ -33,7 +33,7 @@ def squads(context: AssetExecutionContext) -> MaterializeResult:
     season = context.partition_key
     context.log.info(f"Creating Squads asset for season {season}")
 
-    run_spider("squads", season)
+    run_squads_spider("squads", season)
 
     context.log.info(f"Squads asset scraped for season {season}")
 
