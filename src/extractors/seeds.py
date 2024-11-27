@@ -1,8 +1,10 @@
 import pandas as pd
+import polars as pl
 import pycountry
 import pycountry_convert as pc
 import requests
 from bs4 import BeautifulSoup
+from difflib import SequenceMatcher
 
 
 def get_fifa_codes() -> dict[str, str]:
@@ -57,3 +59,50 @@ def get_continent_name(name: str) -> str:
     continent_code = pc.country_alpha2_to_continent_code(alpha2)
     continent_name = pc.convert_continent_code_to_continent_name(continent_code)
     return continent_name
+
+
+def create_team_name_mapping(
+    source_names: list[str], target_names: list[str]
+) -> pl.DataFrame:
+    """
+    Creates a mapping between two lists of team names using fuzzy string matching.
+
+    Args:
+        source_names (list): List of source team names
+        target_names (list): List of target team names
+
+    Returns:
+        dict: Mapping from source names to target names
+    """
+
+    def get_similarity(s1, s2):
+        """Calculate similarity ratio between two strings"""
+        return SequenceMatcher(None, s1, s2).ratio()
+
+    mapping = {}
+    used_targets = set()
+
+    # Sort source names by length (longest first) to handle cases like "Manchester City" vs "Manchester United"
+    sorted_source = sorted(source_names, key=len, reverse=True)
+
+    for source in sorted_source:
+
+        if source == "Rennes":  #  algorithm does not match Rennes with Stade Rennais FC
+            best_match = "Stade Rennais FC"
+            mapping[source] = best_match
+            used_targets.add(best_match)
+            continue
+
+        # Find the best matching target name
+        best_match = max(
+            target_names,
+            key=lambda x: get_similarity(source, x) if x not in used_targets else 0,
+        )
+
+        mapping[source] = best_match
+        used_targets.add(best_match)
+
+    old_names = list(mapping.keys())
+    new_names = list(mapping.values())
+
+    return pl.DataFrame({"fbref_teams": old_names, "tmarket_names": new_names})
