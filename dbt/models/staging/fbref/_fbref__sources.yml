@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: country_data
+  - name: seeds
     tables:
       - name: fifa_country_catalogue
         meta:
@@ -11,7 +11,15 @@ sources:
             read_parquet(
             '../data/fifa_country_catalogue.parquet'
             )
-
+      - name: tmarket_squad_names
+        meta:
+          dagster:
+            asset_key: ['team_mapping_asset']
+          external_location: >
+            read_parquet(
+            '../data/team_mapping.parquet'
+            )
+            
   - name: fbref
     tables:
       - name: player_defense 
@@ -22,5 +30,91 @@ sources:
             read_parquet(
             '../data/raw/fbref/*/player_defense.parquet'
             )
- 
-
+      - name: player_gca 
+        meta:
+          dagster:
+            asset_key: ['player_gca']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_gca.parquet'
+            )
+      - name: player_keeper_adv 
+        meta:
+          dagster:
+            asset_key: ['player_keeper_adv']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_keeper_adv.parquet'
+            )
+      - name: player_keeper 
+        meta:
+          dagster:
+            asset_key: ['player_keeper']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_keeper.parquet'
+            )
+      - name: player_misc 
+        meta:
+          dagster:
+            asset_key: ['player_misc']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_misc.parquet'
+            )
+      - name: player_passing_type 
+        meta:
+          dagster:
+            asset_key: ['player_passing_type']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_passing_type.parquet'
+            )
+      - name: player_passing 
+        meta:
+          dagster:
+            asset_key: ['player_passing']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_passing.parquet'
+            )
+      - name: player_playing_time 
+        meta:
+          dagster:
+            asset_key: ['player_playing_time']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_playing_time.parquet'
+            )
+      - name: player_possession 
+        meta:
+          dagster:
+            asset_key: ['player_possession']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_possession.parquet'
+            )
+      - name: player_shooting 
+        meta:
+          dagster:
+            asset_key: ['player_shooting']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_shooting.parquet'
+            )
+      - name: player_standard_stats 
+        meta:
+          dagster:
+            asset_key: ['player_standard_stats']
+          external_location: > 
+            read_parquet(
+            '../data/raw/fbref/*/player_standard_stats.parquet'
+            )       
+      - name: player_wages
+        meta:
+          dagster:
+            asset_key: ['player_wages']
+          external_location: >
+            read_parquet(
+            '../data/raw/fbref/*/player_wages*.parquet'
+            )     
