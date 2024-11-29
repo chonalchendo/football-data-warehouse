@@ -2,9 +2,14 @@ version: 2
 
 models:
   - name: stg_transfermarkt__squads
+    config:
+      meta:
+        dagster:
+          group: transfermarkt
     columns:
       - name: tm_id
         description: "Primary key for the table"
         data_type: VARCHAR
         data_tests:
           - not_null
+  
