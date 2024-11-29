@@ -7,4 +7,63 @@ models:
     #     description: "Primary key for the table"
     #     data_type: VARCHAR
     #     data_tests:
- 
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_gca
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_keeper_adv
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_keeper
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_misc
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_passing_type
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_passing
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_playing_time
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_possession
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_shooting
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_standard_stats
+    config:
+      meta:
+        dagster:
+          group: fbref
+  - name: stg_fbref__player_wages
+    config:
+      meta:
+        dagster:
+          group: fbref
+  
