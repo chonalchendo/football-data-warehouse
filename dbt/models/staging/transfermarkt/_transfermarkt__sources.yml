@@ -8,7 +8,6 @@ sources:
           dagster:
             asset_key: ['squads']
           external_location: >
-            read_json(
-            '../data/raw/transfermarkt/*/squads.json.gz',
-            auto_detect=true
+            read_parquet(
+            '../data/raw/transfermarkt/*/squads.parquet'
             )
