@@ -1960,7 +1960,7 @@ scrapy = "^2.11.2"
 type = "git"
 url = "https://github.com/chonalchendo/football-data-extractor.git"
 reference = "master"
-resolved_reference = "44743d276ca7f35848fe49f4bfec8f55ed9c2e92"
+resolved_reference = "8899167391f75f034be569b6d7a496ae7c78409a"
 
 [[package]]
 name = "frozenlist"
