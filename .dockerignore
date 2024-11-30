@@ -5,3 +5,11 @@ __pycache__
 *.pyc
 *.pyo
 *.pyd
+.env
+.dvc/cache
+.dvc/tmp
+.scrapy
+infra
+data/prep
+data/raw
+prep/stage
