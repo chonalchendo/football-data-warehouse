@@ -3,10 +3,11 @@ from dagster_dbt import DbtCliResource
 
 from .assets import seeds, transfermarkt
 from .assets.dbt import my_dbt_assets
-from .assets.fbref import generate_fbref_stat_asset, fbref_wage_asset
+from .assets.fbref import fbref_wage_asset, generate_fbref_stat_asset
 from .constants import FBREF_STATS_COLLECTORS
+from .jobs import (fbref_raw_stats_assets, team_mapping_job,
+                   transfermarkt_raw_assets)
 from .project import dbt_project
-from .jobs import team_mapping_job, transfermarkt_raw_assets, fbref_raw_stats_assets
 
 fbref_stat_assets = [
     generate_fbref_stat_asset(collector) for collector in FBREF_STATS_COLLECTORS

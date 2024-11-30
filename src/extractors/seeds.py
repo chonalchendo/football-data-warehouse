@@ -1,10 +1,11 @@
+from difflib import SequenceMatcher
+
 import pandas as pd
 import polars as pl
 import pycountry
 import pycountry_convert as pc
 import requests
 from bs4 import BeautifulSoup
-from difflib import SequenceMatcher
 
 
 def get_fifa_codes() -> dict[str, str]:

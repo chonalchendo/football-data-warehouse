@@ -22,7 +22,7 @@ def run_wage_crawler(
     settings = get_config().fbref_extract
     params = {"comp_id": comp_id, "comp_name": comp_name}
     feed = ParquetFeed(output_path=settings.FEEDS.PATH, format=settings.FEEDS.FORMAT)
-    
+
     runner = NavigatorRunner(feed=feed, download_delay=download_delay)
     runner.navigate(collector="player_wages", params=params, season=season)
     runner.start()
@@ -41,4 +41,4 @@ if __name__ == "__main__":
     # for comp, id in comps.items():
     #     run_wage_crawler(comp_id=id, comp_name=comp, season=2021)
 
-    run_stats_crawler(collector='player_defense', season='2024')
+    run_stats_crawler(collector="player_defense", season="2024")

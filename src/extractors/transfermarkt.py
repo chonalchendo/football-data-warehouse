@@ -1,6 +1,7 @@
-from rich import print
 from pathlib import Path
+
 import polars as pl
+from rich import print
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings

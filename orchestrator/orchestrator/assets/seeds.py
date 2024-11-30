@@ -1,19 +1,11 @@
 from pathlib import Path
 
 import polars as pl
-from dagster import (
-    AssetExecutionContext,
-    MaterializeResult,
-    MetadataValue,
-    asset,
-)
+from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
+                     asset)
 
-
-from src.extractors.seeds import (
-    get_continent_name,
-    get_fifa_codes,
-    create_team_name_mapping,
-)
+from src.extractors.seeds import (create_team_name_mapping, get_continent_name,
+                                  get_fifa_codes)
 
 from ..constants import FBREF_LEAGUES, TMARKET_LEAGUES
 

@@ -1,4 +1,5 @@
 from dagster import define_asset_job, in_process_executor
+
 from .constants import FBREF_STATS_COLLECTORS
 
 team_mapping_job = define_asset_job(

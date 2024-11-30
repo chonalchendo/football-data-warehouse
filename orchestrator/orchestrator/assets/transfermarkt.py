@@ -1,12 +1,9 @@
 import polars as pl
-from dagster import (
-    AssetExecutionContext,
-    MaterializeResult,
-    MetadataValue,
-    asset,
-)
+from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
+                     asset)
 
 from src.extractors.transfermarkt import run_clubs_spider, run_squads_spider
+
 from ..partitions import SEASON_PARTITIONS
 
 

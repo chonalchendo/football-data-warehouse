@@ -1,14 +1,11 @@
+import time
+
 import polars as pl
-from dagster import (
-    AssetExecutionContext,
-    MaterializeResult,
-    MetadataValue,
-    asset,
-)
+from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
+                     asset)
 
 from src.extractors.fbref import run_stats_crawler, run_wage_crawler
 from src.extractors.settings import get_config
-import time
 
 from ..partitions import SEASON_PARTITIONS
 
