@@ -7,6 +7,9 @@ on:
 
 env:
   SEASON: "2024"
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 
 jobs:
   sync-raw-data:
@@ -22,7 +25,10 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0  # Ensures full git history for DVC
-
+    - name: Set DVC credentials
+      run: |
+        dvc remote modify --local s3 access_key_id $AWS_ACCESS_KEY_ID
+        dvc remote modify --local s3 secret_access_key $AWS_SECRET_ACCESS_KEY
     - name: DVC pull data
       continue-on-error: false  # Fail the workflow if DVC pull fails
       run: |
@@ -38,9 +44,9 @@ jobs:
         dvc add data/raw/transfermarkt
       
     - name: DVC commit and push
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      # env:
+      #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         dvc commit -f && dvc push --remote s3
 
