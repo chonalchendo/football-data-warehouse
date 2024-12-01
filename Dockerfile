@@ -21,7 +21,5 @@ RUN git config --global user.email "football-data-warehouse-ci@football-data-war
 
 ADD src/bootstrap.sh /app
 
-ENV DAGSTER_HOME=app/orchestrator
-
 ENTRYPOINT ["/bin/bash", "/app/bootstrap.sh"]
 

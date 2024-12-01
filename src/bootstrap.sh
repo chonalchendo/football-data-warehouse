@@ -3,10 +3,14 @@
 set -ex
 
 PROJECT_HOME=/app/football-data-warehouse
+DAGSTER_HOME=$PROJECT_HOME/orchestrator
 BRANCH=$1
 COMMAND=$2
 
 shift 2
+
+# Export Dagster home environment variable
+export DAGSTER_HOME=$DAGSTER_HOME
 
 if ! [ -d $PROJECT_HOME ]; then
     echo "Setting up project dir"
