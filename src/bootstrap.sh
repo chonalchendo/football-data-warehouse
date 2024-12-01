@@ -17,15 +17,15 @@ if ! [ -d $PROJECT_HOME ]; then
     if ! [ -z ${BRANCH+x} ]; then
         git clone --branch $BRANCH https://github.com/chonalchendo/football-data-warehouse.git
         cd $PROJECT_HOME
-        if ! [ -z ${DAGSTER_HOME+x} ]; then
-            echo "Setting up Dagster home"
-            cp $PROJECT_HOME/orchestrator/dagster.yaml $DAGSTER_HOME # Copy the dagster.yaml file to the Dagster home
-            rm -rf $PROJECT_HOME/orchestrator/dagster.yaml # Remove the dagster.yaml from the project home
-            echo "Dagster home setup complete"
-        else
-            echo "DAGSTER_HOME is required to bootstrap the environment"
-            exit 1
-        fi
+        # if ! [ -z ${DAGSTER_HOME+x} ]; then
+        #     echo "Setting up Dagster home"
+        #     cp $PROJECT_HOME/orchestrator/dagster.yaml $DAGSTER_HOME # Copy the dagster.yaml file to the Dagster home
+        #     rm -rf $PROJECT_HOME/orchestrator/dagster.yaml # Remove the dagster.yaml from the project home
+        #     echo "Dagster home setup complete"
+        # else
+        #     echo "DAGSTER_HOME is required to bootstrap the environment"
+        #     exit 1
+        # fi
     else
         echo "BRANCH is required to bootstrap the environment"
         exit 1
