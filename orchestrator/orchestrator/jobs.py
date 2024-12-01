@@ -19,3 +19,9 @@ fbref_raw_stats_assets = define_asset_job(
     selection=FBREF_STATS_COLLECTORS,
     executor_def=in_process_executor,
 )
+
+all_raw_assets_job = define_asset_job(
+    name="all_raw_assets_job",
+    selection=FBREF_STATS_COLLECTORS + ["squads"],
+    executor_def=in_process_executor,
+)
