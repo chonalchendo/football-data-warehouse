@@ -11,8 +11,8 @@ TRANSFERMARKT_ARGS = --crawler squads --season 2024
 DOCKER_IMAGE_NAME = chonalchendo/football-data-warehouse
 PLATFORM ?= linux/amd64
 PLATFORM_TAG ?= linux-amd64
-TAG ?= master
-IMAGE_TAG = $(PLATFORM_TAG)-$(TAG)
+BRANCH ?= master
+IMAGE_TAG = $(PLATFORM_TAG)-$(BRANCH)
 
 # Help target
 help:
@@ -39,7 +39,10 @@ format:
 # Target to build the docker image
 docker-build:
 	@echo "Building docker image..."
-	docker build --platform=$(PLATFORM) -t $(DOCKER_IMAGE_NAME):$(IMAGE_TAG) .
+	docker build \
+	--platform=$(PLATFORM) \
+	--build-arg BRANCH=$(BRANCH) \
+	-t $(DOCKER_IMAGE_NAME):$(IMAGE_TAG) .
 
 docker-login-dockerhub:
 	@echo "Logging in to DockerHub with token"
