@@ -78,7 +78,7 @@ dagster-run-asset-partition:
 	dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASON)
 
 dagster-job-partitions:
-	dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON)
+	dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON) --yes
 
 dbt-build:
 	cd dbt && dbt build
