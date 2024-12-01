@@ -9,6 +9,7 @@ COPY orchestrator/dagster.yaml ${DAGSTER_HOME}/dagster.yaml
 # ENV ROOT_PATH=${DAGSTER_HOME} 
 
 WORKDIR /app
+ENV ROOT_PATH=/app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
