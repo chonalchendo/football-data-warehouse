@@ -15,7 +15,7 @@ jobs:
   sync-raw-data:
     runs-on: ubuntu-latest
     container:
-      image: chonalchendo/football-data-warehouse:linux-amd64-master
+      image: chonalchendo/football-data-warehouse:linux-amd64-${{ github.ref_name }}
     defaults:
       run:
         shell: bash -l {0}
