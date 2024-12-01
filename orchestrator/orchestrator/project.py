@@ -1,8 +1,12 @@
+import os
 from pathlib import Path
 
 from dagster_dbt import DbtProject
 
-relative_path = (Path(__file__).parent.parent.parent / "dbt").resolve()
+default_path = (Path(__file__).parent.parent.parent).resolve()
+
+root_path = os.environ.get("ROOT_PATH", default_path)
+relative_path = os.path.join(root_path, "dbt")
 
 dbt_project = DbtProject(
     project_dir=relative_path,
