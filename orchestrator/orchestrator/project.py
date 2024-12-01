@@ -4,7 +4,7 @@ from pathlib import Path
 # from dagster_dbt import DbtProject
 from dagster_dbt import DbtCliResource
 
-dbt_project_dir = (Path(__file__).joinpath("../..", "dbt")).resolve()
+dbt_project_dir = (Path(__file__).joinpath("../../..", "dbt")).resolve()
 
 dbt = DbtCliResource(
     project_dir=os.fspath(dbt_project_dir),
