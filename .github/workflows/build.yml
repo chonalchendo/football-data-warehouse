@@ -1,21 +1,39 @@
-
 name: Build and Push Docker Image 
 
 on:
   push:
-    branches: [master]
+    branches: [master, development]
   pull_request:
-    branches: [master]
+    branches: [master, development]
 
 jobs:
   build-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Set Docker Image Tag and Branch
+        id: set-tag
+        run: |
+          if [[ "${{ github.ref_name }}" == "master" ]]; then
+            echo "tag=master" >> $GITHUB_OUTPUT
+            echo "branch=master" >> $GITHUB_OUTPUT
+            echo "run_workflow=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_name }}" == "development" ]]; then
+            echo "tag=development" >> $GITHUB_OUTPUT
+            echo "branch=development" >> $GITHUB_OUTPUT
+            echo "run_workflow=true" >> $GITHUB_OUTPUT
+          else
+            echo "tag=unknown" >> $GITHUB_OUTPUT
+            echo "branch=master" >> $GITHUB_OUTPUT
+            echo "run_workflow=false" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Build and Push
+        if: steps.set-tag.outputs.run_workflow == 'true'
         env:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          TAG: ${{ steps.set-tag.outputs.tag }}
+          BRANCH: ${{ steps.set-tag.outputs.branch }}
         run: |
-          make docker-push-dockerhub 
-
-
+          make docker-push-dockerhub BRANCH=$BRANCH
