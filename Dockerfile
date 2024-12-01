@@ -3,6 +3,7 @@ FROM python:3.12-slim
 # create dagster_home directory
 RUN mkdir -p dagster_home
 ENV DAGSTER_HOME=/dagster_home
+ENV DAGSTER_DBT_PARSE_PROJECT_ON_LOAD=1
 
 COPY orchestrator/dagster.yaml ${DAGSTER_HOME}/dagster.yaml
 # root path for dagster.yaml file
