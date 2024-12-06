@@ -21,6 +21,7 @@ dependencies = [
     "pydantic-settings>=2.6.1",
     "football-data-extractor",
     "dagit>=1.9.4",
+    "pre-commit>=4.0.1",
 ]
 
 [tool.uv.sources]
