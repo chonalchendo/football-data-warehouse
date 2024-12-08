@@ -6,7 +6,7 @@ sources:
       - name: fifa_country_catalogue
         meta:
           dagster:
-            asset_key: ['fifa_country_catalogue']
+            asset_key: ['raw', 'seeds', 'fifa_country_catalogue']
           external_location: >
             read_parquet(
             '../data/fifa_country_catalogue.parquet'
@@ -14,7 +14,7 @@ sources:
       - name: tmarket_squad_names
         meta:
           dagster:
-            asset_key: ['team_mapping_asset']
+            asset_key: ['raw', 'seeds', 'team_mapping_asset']
           external_location: >
             read_parquet(
             '../data/team_mapping.parquet'
@@ -25,7 +25,7 @@ sources:
       - name: player_defense 
         meta:
           dagster:
-            asset_key: ['player_defense']
+            asset_key: ['raw', 'fbref', 'player_defense']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_defense.parquet'
@@ -33,7 +33,7 @@ sources:
       - name: player_gca 
         meta:
           dagster:
-            asset_key: ['player_gca']
+            asset_key: ['raw', 'fbref', 'player_gca']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_gca.parquet'
@@ -41,7 +41,7 @@ sources:
       - name: player_keeper_adv 
         meta:
           dagster:
-            asset_key: ['player_keeper_adv']
+            asset_key: ['raw', 'fbref', 'player_keeper_adv']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_keeper_adv.parquet'
@@ -49,7 +49,7 @@ sources:
       - name: player_keeper 
         meta:
           dagster:
-            asset_key: ['player_keeper']
+            asset_key: ['raw', 'fbref', 'player_keeper']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_keeper.parquet'
@@ -57,7 +57,7 @@ sources:
       - name: player_misc 
         meta:
           dagster:
-            asset_key: ['player_misc']
+            asset_key: ['raw', 'fbref', 'player_misc']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_misc.parquet'
@@ -65,7 +65,7 @@ sources:
       - name: player_passing_type 
         meta:
           dagster:
-            asset_key: ['player_passing_type']
+            asset_key: ['raw', 'fbref', 'player_passing_type']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_passing_type.parquet'
@@ -73,7 +73,7 @@ sources:
       - name: player_passing 
         meta:
           dagster:
-            asset_key: ['player_passing']
+            asset_key: ['raw', 'fbref', 'player_passing']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_passing.parquet'
@@ -81,7 +81,7 @@ sources:
       - name: player_playing_time 
         meta:
           dagster:
-            asset_key: ['player_playing_time']
+            asset_key: ['raw', 'fbref', 'player_playing_time']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_playing_time.parquet'
@@ -89,7 +89,7 @@ sources:
       - name: player_possession 
         meta:
           dagster:
-            asset_key: ['player_possession']
+            asset_key: ['raw', 'fbref', 'player_possession']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_possession.parquet'
@@ -97,7 +97,7 @@ sources:
       - name: player_shooting 
         meta:
           dagster:
-            asset_key: ['player_shooting']
+            asset_key: ['raw', 'fbref', 'player_shooting']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_shooting.parquet'
@@ -105,7 +105,7 @@ sources:
       - name: player_standard_stats 
         meta:
           dagster:
-            asset_key: ['player_standard_stats']
+            asset_key: ['raw', 'fbref', 'player_standard_stats']
           external_location: > 
             read_parquet(
             '../data/raw/fbref/*/player_standard_stats.parquet'
