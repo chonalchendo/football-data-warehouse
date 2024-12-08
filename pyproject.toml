@@ -19,13 +19,15 @@ dependencies = [
     "pycountry>=24.6.1",
     "pycountry-convert>=0.7.2",
     "pydantic-settings>=2.6.1",
-    "football-data-extractor",
     "dagit>=1.9.4",
     "pre-commit>=4.0.1",
+    "s3fs>=2024.10.0",
+    "football-data-extractor",
+    "ipykernel>=6.29.5",
 ]
-
-[tool.uv.sources]
-football-data-extractor = { git = "https://github.com/chonalchendo/football-data-extractor.git" }
 
 [tool.dagster]
 module_name = 'orchestrator'
+
+[tool.uv.sources]
+football-data-extractor = { git = "https://github.com/chonalchendo/football-data-extractor.git" }
