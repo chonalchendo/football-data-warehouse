@@ -69,16 +69,16 @@ dvc_pull:
 	dvc pull
 
 dagster-dev:
-	dagster dev -m orchestrator.orchestrator
+	uv run dagster dev -m orchestrator.orchestrator
 
 dagster-run-asset:
-	dagster asset materialize -m orchestrator.orchestrator --select $(ASSET)
+	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET)
 
-dagster-run-asset-partition:
-	dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASON)
+dagster-asset-partition:
+	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASON)
 
 dagster-job-partitions:
-	dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON) --noprompt
+	uv run dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON)
 
 dbt-build:
 	cd dbt && dbt build
