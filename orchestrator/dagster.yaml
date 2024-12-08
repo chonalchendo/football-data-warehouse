@@ -2,31 +2,31 @@ local_artifact_storage:
   module: dagster.core.storage.root
   class: LocalArtifactStorage
   config:
-    base_dir: "${ROOT_PATH}/orchestrator/artifacts"
+    base_dir: "orchestrator/orchestrator/artifacts"
 
 run_storage:
   module: dagster.core.storage.runs
   class: SqliteRunStorage
   config:
-    base_dir: "${ROOT_PATH}/orchestrator/artifacts/storage"
+    base_dir: "orchestrator/orchestrator/artifacts/storage"
 
 event_log_storage:
   module: dagster.core.storage.event_log
   class: SqliteEventLogStorage
   config:
-    base_dir: "${ROOT_PATH}/orchestrator/artifacts/history"
+    base_dir: "orchestrator/orchestrator/artifacts/history"
 
 schedule_storage:
   module: dagster.core.storage.schedules
   class: SqliteScheduleStorage
   config:
-    base_dir: "${ROOT_PATH}/orchestrator/artifacts/schedules"
+    base_dir: "orchestrator/orchestrator/artifacts/schedules"
 
 compute_logs:
   module: dagster.core.storage.local_compute_log_manager
   class: LocalComputeLogManager
   config:
-    base_dir: "${ROOT_PATH}/orchestrator/artifacts/logs"
+    base_dir: "orchestrator/orchestrator/artifacts/logs"
 
 telemetry:
   enabled: false
