@@ -6,7 +6,7 @@ sources:
       - name: squads
         meta:
           dagster:
-            asset_key: ['squads']
+            asset_key: ['raw', 'transfermarkt', 'squads']
           external_location: >
             read_parquet(
             '../data/raw/transfermarkt/*/squads.parquet'
