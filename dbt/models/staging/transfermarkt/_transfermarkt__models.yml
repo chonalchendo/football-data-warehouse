@@ -6,10 +6,16 @@ models:
       meta:
         dagster:
           group: transfermarkt
+          asset_key: ["staging", "transfermarkt", "squads"]
     columns:
       - name: tm_id
         description: "Primary key for the table"
         data_type: VARCHAR
         data_tests:
           - not_null
-  
+  # - name: stg_transfermarkt__clubs
+  #   config:
+  #     meta:
+  #       dagster:
+  #         group: transfermarkt
+  #         asset_key: ["staging", "transfermarkt", "clubs"]

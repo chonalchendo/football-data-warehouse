@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: valuations
+    config:
+      meta:
+        dagster:
+          group: curated
+          asset_key: ["curated", "valuations"]
