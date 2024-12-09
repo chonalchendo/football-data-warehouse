@@ -13,10 +13,10 @@ FROM python:3.12-slim-bookworm
 WORKDIR /app
 # ENV ROOT_PATH=/app/football-data-warehouse/football-data-warehouse
 
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     build-essential \
-#     git \
-#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 # RUN pip install --no-cache -U pip && pip install --no-cache poetry
 
