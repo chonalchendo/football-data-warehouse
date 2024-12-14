@@ -87,7 +87,6 @@ def create_team_name_mapping(
     sorted_source = sorted(source_names, key=len, reverse=True)
 
     for source in sorted_source:
-
         if source == "Rennes":  #  algorithm does not match Rennes with Stade Rennais FC
             best_match = "Stade Rennais FC"
             mapping[source] = best_match
