@@ -5,3 +5,4 @@ football_data_warehouse:
       type: duckdb
       path: duckdb/database.db
       schema: main
+      threads: 4
