@@ -4,22 +4,17 @@ from dagster import (AssetSelection, RunRequest, define_asset_job,
 
 from .constants import CURRENT_SEASON
 
-# team_mapping_job = define_asset_job(
-#     name="team_mapping_job",
-#     selection=["squads", "player_defense", "team_mapping_asset"],
-#     executor_def=in_process_executor,
-# )
-
-
 transfermarkt_raw_assets = define_asset_job(
     name="transfermarkt_raw_assets",
     selection=AssetSelection.key_prefixes("raw", "transfermarkt"),
     executor_def=multi_or_in_process_executor,
 )
 
-fbref_raw_stats_assets = define_asset_job(
-    name="fbref_raw_stats_assets",
-    selection=AssetSelection.key_prefixes("raw", "fbref"),
+fbref_stats_job = define_asset_job(
+    name="fbref_stats_job",
+    selection=AssetSelection.key_prefixes(
+        ["raw", "fbref"], ["staging", "fbref"], ["export", "fbref"]
+    ),
     executor_def=in_process_executor,
 )
 
@@ -29,6 +24,6 @@ def transfermarkt_raw_schedule():
     yield RunRequest(partition_key=CURRENT_SEASON)
 
 
-@schedule(cron_schedule="0 4 * * TUE,FRI", job=fbref_raw_stats_assets)
-def fbref_raw_stats_schedule():
+@schedule(cron_schedule="0 4 * * FRI", job=fbref_stats_job)
+def fbref_stats_schedule():
     yield RunRequest(partition_key=CURRENT_SEASON)
