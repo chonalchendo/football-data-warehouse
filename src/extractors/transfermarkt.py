@@ -40,7 +40,3 @@ def run_squads_spider(crawler: str, season: str) -> None:
 
     process.crawl(crawler, season=season, clubs=clubs)
     process.start()
-
-
-if __name__ == "__main__":
-    run_squads_spider(crawler="squads", season="2024")

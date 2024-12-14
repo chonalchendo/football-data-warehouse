@@ -1,5 +1,3 @@
-import argparse
-
 from fbref.fbref import NavigatorRunner, ParquetFeed
 
 from .settings import get_config
@@ -26,19 +24,3 @@ def run_wage_crawler(
     runner = NavigatorRunner(feed=feed, download_delay=download_delay)
     runner.navigate(collector="player_wages", params=params, season=season)
     runner.start()
-
-
-if __name__ == "__main__":
-    # arg_parser = argparse.ArgumentParser()
-    # arg_parser.add_argument("--collector", type=str, required=True)
-    # arg_parser.add_argument("--season", type=str, required=True)
-    # args = arg_parser.parse_args()
-
-    # run_stats_crawler(collector=args.collector, season=args.season)
-    # settings = get_config().fbref_extract
-    # comps = settings.COMPS
-
-    # for comp, id in comps.items():
-    #     run_wage_crawler(comp_id=id, comp_name=comp, season=2021)
-
-    run_stats_crawler(collector="player_defense", season="2024")

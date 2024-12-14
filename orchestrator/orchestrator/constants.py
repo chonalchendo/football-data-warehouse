@@ -1,3 +1,5 @@
+CURRENT_SEASON = "2024"
+
 FBREF_STATS_COLLECTORS = [
     "player_defense",
     "player_misc",
@@ -15,3 +17,9 @@ FBREF_STATS_COLLECTORS = [
 
 TMARKET_LEAGUES = ["premier-league", "la-liga", "bundesliga", "serie-a", "ligue-1"]
 FBREF_LEAGUES = ["Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1"]
+
+
+class Assets:
+    RAW_TRANSFERMARKT: list[str] = ["raw", "transfermarkt"]
+    RAW_FBREF: list[str] = ["raw", "fbref"]
+    RAW_ALL: list[str] = ["raw"]

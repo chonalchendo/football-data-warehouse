@@ -1,27 +1,29 @@
-from dagster import define_asset_job, in_process_executor
+from dagster import (AssetSelection, RunRequest, define_asset_job,
+                     in_process_executor, multi_or_in_process_executor,
+                     schedule)
 
-from .constants import FBREF_STATS_COLLECTORS
-
-team_mapping_job = define_asset_job(
-    name="team_mapping_job",
-    selection=["squads", "player_defense", "team_mapping_asset"],
-    executor_def=in_process_executor,
-)
+from .constants import CURRENT_SEASON
 
 transfermarkt_raw_assets = define_asset_job(
     name="transfermarkt_raw_assets",
-    selection=["squads"],
-    # executor_def=in_process_executor,
+    selection=AssetSelection.key_prefixes("raw", "transfermarkt"),
+    executor_def=multi_or_in_process_executor,
 )
 
-fbref_raw_stats_assets = define_asset_job(
-    name="fbref_raw_stats_assets",
-    selection=FBREF_STATS_COLLECTORS,
+fbref_stats_job = define_asset_job(
+    name="fbref_stats_job",
+    selection=AssetSelection.key_prefixes(
+        ["raw", "fbref"], ["staging", "fbref"], ["export", "fbref"]
+    ),
     executor_def=in_process_executor,
 )
 
-all_raw_assets_job = define_asset_job(
-    name="all_raw_assets_job",
-    selection=FBREF_STATS_COLLECTORS + ["squads"],
-    executor_def=in_process_executor,
-)
+
+@schedule(cron_schedule="0 4 * * TUE,FRI", job=transfermarkt_raw_assets)
+def transfermarkt_raw_schedule():
+    yield RunRequest(partition_key=CURRENT_SEASON)
+
+
+@schedule(cron_schedule="0 4 * * FRI", job=fbref_stats_job)
+def fbref_stats_schedule():
+    yield RunRequest(partition_key=CURRENT_SEASON)

@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import polars as pl
-from dagster import (AssetExecutionContext, MaterializeResult, MetadataValue,
-                     asset)
+from dagster import (AssetExecutionContext, AssetKey, MaterializeResult,
+                     MetadataValue, asset)
 
 from src.extractors.seeds import (create_team_name_mapping, get_continent_name,
                                   get_fifa_codes)
@@ -10,7 +10,13 @@ from src.extractors.seeds import (create_team_name_mapping, get_continent_name,
 from ..constants import FBREF_LEAGUES, TMARKET_LEAGUES
 
 
-@asset(compute_kind="python", description="FIFA country codes", group_name="fbref")
+@asset(
+    name="fifa_country_catalogue",
+    key_prefix=["raw", "seeds"],
+    compute_kind="python",
+    description="FIFA country codes",
+    group_name="seeds",
+)
 def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
     context.log.info("Creating FIFA country codes asset")
 
@@ -47,12 +53,18 @@ def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
 
 
 @asset(
+    name="team_mapping",
+    key_prefix=["raw", "seeds"],
     compute_kind="python",
     description="Team mapping from fbref to transfermarkt",
-    group_name="fbref",
-    deps=["player_defense", "squads"],
+    group_name="seeds",
+    # deps=["player_defense", "squads"],
+    deps=[
+        AssetKey(["raw", "fbref", "player_defense"]),
+        AssetKey(["raw", "transfermarkt", "squads"]),
+    ],
 )
-def team_mapping_asset(context: AssetExecutionContext) -> MaterializeResult:
+def team_mapping(context: AssetExecutionContext) -> MaterializeResult:
     context.log.info("Creating team mapping for fbref assets")
 
     data_path = Path("data").resolve()

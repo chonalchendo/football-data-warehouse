@@ -1,4 +1,4 @@
-FROM python:3.12-slim 
+FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
@@ -7,12 +7,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache -U pip && pip install --no-cache poetry
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml poetry.lock ./
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-root
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen
 
+ENV PATH="/app/.venv/bin:$PATH"
 
 # Set up Git configuration 
 RUN git config --global user.email "football-data-warehouse-ci@football-data-warehouse.dev" && \
@@ -20,6 +20,12 @@ RUN git config --global user.email "football-data-warehouse-ci@football-data-war
     git config --global core.sshCommand "ssh -o StrictHostKeyChecking=no" 
 
 ADD src/bootstrap.sh /app
+    
+# Allow branch to be passed as a build argument with a default
+ARG BRANCH=master
+ENV BRANCH=$BRANCH
 
-ENTRYPOINT ["/bin/bash", "/app/bootstrap.sh"]
+ENTRYPOINT ["/bin/bash", "/app/bootstrap.sh", "${BRANCH}"]
 
+
+    

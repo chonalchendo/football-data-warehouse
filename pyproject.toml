@@ -1,53 +1,33 @@
-[tool.poetry]
+[project]
 name = "football-data-warehouse"
 version = "0.1.0"
 description = "Warehouse for football data from multiple sources"
-authors = ["chonalchendo <110059232+chonalchendo@users.noreply.github.com>"]
-license = "MIT"
 readme = "README.md"
-
-
-[tool.poetry.dependencies]
-python = ">=3.12,<3.13"
-scrapy = "^2.11.2"
-football-data-extractor = {git = "https://github.com/chonalchendo/football-data-extractor.git", rev = "master"}
-pyyaml = "^6.0.2"
-dvc = {extras = ["s3"], version = "^3.56.0"}
-dagster = "^1.8.10"
-dagster-webserver = "^1.8.10"
-dagit = "^1.8.10"
-pandas = "^2.2.3"
-dbt-core = "^1.8.7"
-dbt-duckdb = "^1.9.0"
-ipython-sql = "^0.5.0"
-dagster-dbt = "^0.24.11"
-pycountry = "^24.6.1"
-pycountry-convert = "^0.7.2"
-pytest = "^8.3.3"
-pydantic-settings = "^2.6.1"
-black = "^24.10.0"
-isort = "^5.13.2"
-
-
-[tool.poetry.group.dev.dependencies]
-isort = "^5.13.2"
-black = "^24.8.0"
-ipykernel = "^6.29.5"
-
-
-[[tool.poetry.source]]
-name = "grpcio"
-url = "https://github.com/dagster-io/build-grpcio/wiki/Wheels"
-priority = "primary"
-
-
-[[tool.poetry.source]]
-name = "PyPI"
-priority = "supplemental"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+license = "MIT"
+requires-python = ">=3.12.0"
+dependencies = [
+    "dagster-dbt>=0.25.3",
+    "dagster>=1.9.3",
+    "dagster-webserver>=1.9.3",
+    "dagster-aws>=0.25.3",
+    "dbt-core>=1.8.8",
+    "dbt-duckdb>=1.9.1",
+    "scrapy>=2.12.0",
+    "black>=24.10.0",
+    "isort>=5.13.2",
+    "pandas>=2.2.3",
+    "pycountry>=24.6.1",
+    "pycountry-convert>=0.7.2",
+    "pydantic-settings>=2.6.1",
+    "dagit>=1.9.4",
+    "pre-commit>=4.0.1",
+    "s3fs>=2024.10.0",
+    "football-data-extractor",
+    "ipykernel>=6.29.5",
+]
 
 [tool.dagster]
 module_name = 'orchestrator'
+
+[tool.uv.sources]
+football-data-extractor = { git = "https://github.com/chonalchendo/football-data-extractor.git" }

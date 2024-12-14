@@ -11,59 +11,71 @@ models:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_defense']
   - name: stg_fbref__player_gca
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_gca']
   - name: stg_fbref__player_keeper_adv
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_keeper_adv']
   - name: stg_fbref__player_keeper
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_keeper']
   - name: stg_fbref__player_misc
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_misc']
   - name: stg_fbref__player_passing_type
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_passing_type']
   - name: stg_fbref__player_passing
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_passing']
   - name: stg_fbref__player_playing_time
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_playing_time']
   - name: stg_fbref__player_possession
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_possession']
   - name: stg_fbref__player_shooting
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_shooting']
   - name: stg_fbref__player_standard_stats
     config:
       meta:
         dagster:
           group: fbref
+          asset_key: ['staging', 'fbref', 'player_standard_stats']
   - name: stg_fbref__player_wages
     config:
       meta:
         dagster:
+          asset_key: ['staging', 'fbref', 'player_wages']
           group: fbref
   

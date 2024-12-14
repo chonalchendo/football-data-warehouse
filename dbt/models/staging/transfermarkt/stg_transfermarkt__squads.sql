@@ -48,8 +48,6 @@ clean_signing_fee AS (
     FROM clean_market_values
 ),
 
-
-
 -- Clean height
 clean_height AS (
     SELECT

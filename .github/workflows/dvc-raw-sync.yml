@@ -1,60 +1,60 @@
-name: DVC raw data sync
+# name: DVC raw data sync
 
-on:
-  schedule:
-    - cron: '0 4 * * TUE,FRI'
-  workflow_dispatch:  # Allow manual triggering
+# on:
+#   schedule:
+#     - cron: '0 4 * * TUE,FRI'
+#   workflow_dispatch:  # Allow manual triggering
 
-env:
-  SEASON: "2024"
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+# env:
+#   SEASON: "2024"
+#   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
-jobs:
-  sync-raw-data:
-    runs-on: ubuntu-latest
-    container:
-      image: chonalchendo/football-data-warehouse:linux-amd64-master
-    defaults:
-      run:
-        shell: bash -l {0}
+# jobs:
+#   sync-raw-data:
+#     runs-on: ubuntu-latest
+#     container:
+#       image: chonalchendo/football-data-warehouse:linux-amd64-${{ github.ref_name }}
+#     defaults:
+#       run:
+#         shell: bash -l {0}
     
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 0  # Ensures full git history for DVC
-    - name: Set DVC credentials
-      run: |
-        dvc remote modify --local s3 access_key_id $AWS_ACCESS_KEY_ID
-        dvc remote modify --local s3 secret_access_key $AWS_SECRET_ACCESS_KEY
-    - name: DVC pull data
-      continue-on-error: false  # Fail the workflow if DVC pull fails
-      run: |
-        dvc pull || exit 1
+#     steps:
+#     - uses: actions/checkout@v4
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#         fetch-depth: 0  # Ensures full git history for DVC
+#     - name: Set DVC credentials
+#       run: |
+#         dvc remote modify --local s3 access_key_id $AWS_ACCESS_KEY_ID
+#         dvc remote modify --local s3 secret_access_key $AWS_SECRET_ACCESS_KEY
+#     - name: DVC pull data
+#       continue-on-error: false  # Fail the workflow if DVC pull fails
+#       run: |
+#         dvc pull || exit 1
 
-    - name: Run pipeline
-      run: |
-        make dagster-job-partitions JOB=all_raw_assets_job SEASON=$SEASON
+#     - name: Run pipeline
+#       run: |
+#         make dagster-job-partitions JOB=all_raw_assets_job SEASON=$SEASON
 
-    - name: DVC add new data
-      run: |
-        dvc add data/raw/fbref
-        dvc add data/raw/transfermarkt
+#     - name: DVC add new data
+#       run: |
+#         dvc add data/raw/fbref
+#         dvc add data/raw/transfermarkt
       
-    - name: DVC commit and push
-      # env:
-      #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        dvc commit -f && dvc push --remote s3
+#     - name: DVC commit and push
+#       # env:
+#       #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#       #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#       run: |
+#         dvc commit -f && dvc push --remote s3
 
-    - uses: EndBug/add-and-commit@v9
-      with:
-        add: 'data/raw/*.dvc data/raw/.gitignore'
-        message: "🤖 Update raw data: $(date +'%Y-%m-%d %H:%M:%S')"
-        default_author: github_actions
+#     - uses: EndBug/add-and-commit@v9
+#       with:
+#         add: 'data/raw/*.dvc data/raw/.gitignore'
+#         message: "🤖 Update raw data: $(date +'%Y-%m-%d %H:%M:%S')"
+#         default_author: github_actions
 
-    - name: Pull updates
-      run: git pull --rebase
+#     - name: Pull updates
+#       run: git pull --rebase
