@@ -41,5 +41,4 @@ select
     season
 from valuations_data
 
-
 {{ export_to_parquet(this) }}
