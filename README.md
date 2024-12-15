@@ -62,7 +62,6 @@ Available commands:
   make dagster-job-partitions  : Run a specific dagster job with partitions
   make dbt-build               : Run pipeline for dbt assets
   make dbt-compile             : Compile dbt models
-  make help                    : Show this help message
 ```
 
 ### Using the Dagster UI
@@ -76,3 +75,10 @@ To run the pipeline using the Dagster UI, run the command below:
 ```bash
 make dagster-dev
 ```
+
+This will start the Dagster server and you can view the UI by navigating to `http://localhost:3000`.
+
+Here is an example of what the Dagster UI looks like:
+![Dagster UI](images/valuations_lineage.png)
+
+This image shows the flow of data to create the `valuations` dataset before exporting to Amazon S3.
