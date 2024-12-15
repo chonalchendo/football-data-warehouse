@@ -30,6 +30,7 @@ fbref_stat_models = [
     compute_kind="python",
     key_prefix=["export", "fbref"],
     deps=fbref_stat_models,
+    group_name="export",
 )
 def export_fbref_models_to_s3(context: AssetExecutionContext) -> None:
     context.log.info("Exporting fbref models to S3")
@@ -61,6 +62,7 @@ def export_fbref_models_to_s3(context: AssetExecutionContext) -> None:
     compute_kind="python",
     key_prefix=["export"],
     deps=[my_dbt_assets],
+    group_name="export",
 )
 def export_dbt_models_to_s3(context: AssetExecutionContext) -> None:
     context.log.info("Exporting dbt models to S3")

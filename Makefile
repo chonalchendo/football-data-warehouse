@@ -1,10 +1,6 @@
 # Makefile
 .DEFAULT_GOAL := help
 
-# Load environment variables
-# include .env
-# export
-#
 # Default values
 EXTRACT_SCRIPT ?= transfermarkt 
 TRANSFERMARKT_ARGS = --crawler squads --season 2024
@@ -17,24 +13,18 @@ IMAGE_TAG = $(PLATFORM_TAG)-$(BRANCH)
 # Help target
 help:
 	@echo "Available commands:"
-	@echo "  make run-transfermarkt-scraper  : Run the Transfermarkt scraper"
-	@echo "  make docker-pipeline            : Build Docker image and run pipeline"
-	@echo "  make help                       : Show this help message"
+	@echo "  make dagster-dev             : Run dagster dev server"
+	@echo "  make dagster-run-asset       : Materialise a specific dagster asset"
+	@echo "  make dagster-asset-partition : Materialise a specific dagster asset partition"
+	@echo "  make dagster-job-partitions  : Run a specific dagster job with partitions"
+	@echo "  make dbt-build               : Run pipeline for dbt assets"
+	@echo "  make dbt-compile             : Compile dbt models"
 
 
 format:
 	@echo "Running formatter"
 	black .
 	isort .
-
-# Target to run the transfermarkt scraper locally
-# local-transfermarkt-crawler:
-# 	@echo "Running scraper..."
-# 	src/run.sh $(EXTRACT_SCRIPT) $(TRANSFERMARKT_ARGS)
-
-# local-version-transfermarkt:
-# 	@echo "Versioning data..."
-# 	src/version.sh $(EXTRACT_SCRIPT) 
 
 # Target to build the docker image
 docker-build:
@@ -64,9 +54,9 @@ docker-transfermarkt-crawler:
 docker-pipeline: docker-build docker-transfermarkt-crawler
 
 # DVC pull data from gcp 
-dvc_pull:
-	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
-	dvc pull
+# dvc_pull:
+# 	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
+# 	dvc pull
 
 dagster-dev:
 	uv run dagster dev -m orchestrator.orchestrator
@@ -86,6 +76,3 @@ dbt-build:
 dbt-compile:
 	cd dbt && dbt compile
 
-# local-dagster-pipeline:
-# 	chmod +x orchestrator/scripts/run_local.sh
-# 	orchestrator/scripts/run_local.sh
