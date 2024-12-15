@@ -54,6 +54,8 @@ either by simply looking inside the `Makefile` or by running the command below:
 make help
 ```
 
+This will output the following:
+
 ```bash
 Available commands:
   make dagster-dev             : Run dagster dev server
@@ -159,6 +161,8 @@ Using the Duckdb Python API, you can convert the data to a `pandas` or `polars` 
 import duckdb
 
 conn = duckdb.connect('dbt/duckdb/database.db')
+
+# run a query and return the result
 conn.sql('select * from valuations')
 
 # convert to pandas
@@ -167,3 +171,20 @@ df = conn.sql('select * from valuations').df()
 # convert to polars
 df = conn.sql('select * from valuations').pl()
 ```
+
+## Data Sources
+
+### Fbref
+
+`Fbref` is a website that provides detailed football statistics such as player shooting and passing stats. The data is taken from tables such as the ones found [here](https://fbref.com/en/comps/Big5/defense/players/Big-5-European-Leagues-Stats#stats_defense)
+
+### Transfermarkt
+
+`Tranfermarkt` is a well-known football website that provides great data on player market valuations, transfers, and match statistics. The data is taken from tables such as the ones found [here](https://www.transfermarkt.co.uk/tottenham-hotspur/kader/verein/148/saison_id/2021/plus/1)
+
+## Future Work
+
+- Add more data sources such as `Understat` and `Sofascore`
+- Add more data processing steps such as feature engineering and data visualisation
+- Pushlish data sources to a public S3 bucket for easy access
+- Publish to public data areas such as `Kaggle`
