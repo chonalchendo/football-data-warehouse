@@ -14,7 +14,7 @@ sources:
       - name: tmarket_squad_names
         meta:
           dagster:
-            asset_key: ['raw', 'seeds', 'team_mapping_asset']
+            asset_key: ['raw', 'seeds', 'team_mapping']
           external_location: >
             read_parquet(
             '../data/team_mapping.parquet'
@@ -113,7 +113,7 @@ sources:
       - name: player_wages
         meta:
           dagster:
-            asset_key: ['player_wages']
+            asset_key: ['raw', 'fbref', 'player_wages']
           external_location: >
             read_parquet(
             '../data/raw/fbref/*/player_wages*.parquet'
