@@ -31,13 +31,19 @@ git clone https://github.com/chonalchendo/football-data-warehouse.git
 pip install uv
 ```
 
-3. Install the required packages using `uv install`
+3. Setup the virtual environment
 
 ```bash
-uv install
+uv venv --python 3.12
 ```
 
-4. Activate virtual environment
+4. Install the required packages from `pyproject.toml`
+
+```bash
+uv sync
+```
+
+4. Activate virtual environment if not already activated
 
 ```bash
 source .venv/bin/activate
