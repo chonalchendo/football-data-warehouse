@@ -36,3 +36,43 @@ pip install uv
 ```bash
 uv install
 ```
+
+4. Activate virtual environment
+
+```bash
+source .venv/bin/activate
+```
+
+## Running the pipeline
+
+There are a few ways to run the data pipeline that will populate `Duckdb` with data from the sources mentioned above.
+
+To house many of the commands that are used to run the pipeline, a `Makefile` has been created. You can view the commands
+either by simply looking inside the `Makefile` or by running the command below:
+
+```bash
+make help
+```
+
+```bash
+Available commands:
+  make dagster-dev             : Run dagster dev server
+  make dagster-run-asset       : Materialise a specific dagster asset
+  make dagster-asset-partition : Materialise a specific dagster asset partition
+  make dagster-job-partitions  : Run a specific dagster job with partitions
+  make dbt-build               : Run pipeline for dbt assets
+  make dbt-compile             : Compile dbt models
+  make help                    : Show this help message
+```
+
+### Using the Dagster UI
+
+This is a good way to visualise the pipeline and to see what assets (datasets) are being produced at each step.
+You can also view the jobs that are created to manage different parts of the pipeline for example, `fbref_stats_job` is dedicated
+to extracting and cleaning the `fbref` player statistics datasets such as player shooting and passing stats.
+
+To run the pipeline using the Dagster UI, run the command below:
+
+```bash
+make dagster-dev
+```
