@@ -182,6 +182,10 @@ df = conn.sql('select * from valuations').pl()
 
 `Tranfermarkt` is a well-known football website that provides great data on player market valuations, transfers, and match statistics. The data is taken from tables such as the ones found [here](https://www.transfermarkt.co.uk/tottenham-hotspur/kader/verein/148/saison_id/2021/plus/1)
 
+## Infrastructure
+
+All cloud based infrastructure is managed using `Terraform`. The infrastructure is defined in the `infra` directory. Currently, there is no read access to the S3 bucket for public consumption. This is something that will be added in the future.
+
 ## Future Work
 
 - Add more data sources such as `Understat` and `Sofascore`
