@@ -79,6 +79,91 @@ make dagster-dev
 This will start the Dagster server and you can view the UI by navigating to `http://localhost:3000`.
 
 Here is an example of what the Dagster UI looks like:
-![Dagster UI](images/valuations_lineage.png)
+![Dagster UI](images/valuations_lineage_ui.png)
 
 This image shows the flow of data to create the `valuations` dataset before exporting to Amazon S3.
+
+You can run this pipeline by selecting `Materialize all` in the top right corner.
+
+### Using the command line
+
+To run assets or jobs from command line, you first have to check assets and jobs are available. You can check
+by referring the `Assets` and `Jobs` section in the `Dagster` UI.
+
+To run a specific asset run the following:
+
+```bash
+make dagster-run-asset ASSET=<asset_name>
+```
+
+Replace `<asset_name>` with the name of the asset you want to run.
+
+To run a specific asset partition run the following:
+
+```bash
+make dagster-asset-partition ASSET=<asset_name> SEASON=<season>
+```
+
+Replace `<asset_name>` with the name of the asset you want to run and `<season>` is the season you would like to scrape or process data for.
+
+For example, you could run:
+
+```bash
+make dagster-asset-partition ASSET=raw_player_passing SEASON=2022
+```
+
+This command would run the `raw_player_passing` asset for the `2022-2023` season.
+
+You can also run a specific job with partitions using the following command:
+
+```bash
+make dagster-job-partitions JOB=<job_name> SEASON=<season>
+```
+
+An example of this is:
+
+```bash
+make dagster-job-partitions JOB=fbref_stats_job SEASON=2024
+```
+
+### Using dbt
+
+By default, any raw assets parsed using the `football-data-extractor` are stored in the `data/raw` directory.
+If you would just like to run the processing pipeline, you can use dbt which will materialise the processed
+assets into `Duckdb`.
+
+To do this, use the following command:
+
+```bash
+make dbt-build
+```
+
+## Accessing the data
+
+The data is stored in `Duckdb` which is a lightweight, in-memory, OLAP database which is great for local development and
+acts as a local data warehouse.
+
+To access data parsed and processed by the pipeline, there are two options:
+
+1. you can use the `Duckdb` CLI.
+
+```bash
+duckdb dbt/duckdb/database.db -c 'select * from valuations'
+```
+
+2. you can use the `Duckdb` Python API.
+
+Using the Duckdb Python API, you can convert the data to a `pandas` or `polars` DataFrame depending on which package you perfer for further analysis.
+
+```python
+import duckdb
+
+conn = duckdb.connect('dbt/duckdb/database.db')
+conn.sql('select * from valuations')
+
+# convert to pandas
+df = conn.sql('select * from valuations').df()
+
+# convert to polars
+df = conn.sql('select * from valuations').pl()
+```
