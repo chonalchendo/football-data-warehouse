@@ -19,7 +19,6 @@ help:
 	@echo "  make dagster-job-partitions  : Run a specific dagster job with partitions"
 	@echo "  make dbt-build               : Run pipeline for dbt assets"
 	@echo "  make dbt-compile             : Compile dbt models"
-	@echo "  make help                    : Show this help message"
 
 
 format:
