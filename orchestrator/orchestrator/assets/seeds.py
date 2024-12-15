@@ -58,7 +58,6 @@ def fifa_country_catalogue(context: AssetExecutionContext) -> MaterializeResult:
     compute_kind="python",
     description="Team mapping from fbref to transfermarkt",
     group_name="seeds",
-    # deps=["player_defense", "squads"],
     deps=[
         AssetKey(["raw", "fbref", "player_defense"]),
         AssetKey(["raw", "transfermarkt", "squads"]),
