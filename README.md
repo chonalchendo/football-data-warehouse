@@ -1,4 +1,4 @@
-# Data Football Warehouse
+# Football Data Warehouse
 
 ## Overview
 
