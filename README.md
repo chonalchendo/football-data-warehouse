@@ -15,6 +15,10 @@ datasets are also stored in an Amazon S3 bucket.
 
 The data pipeline is automated using `Dagster`.
 
+## Accessing the data
+
+The data parsed and transformed in this project are available on Kaggle [here](https://www.kaggle.com/datasets/conalhenderson/football-data-warehouse/data)
+
 ## Setup
 
 To setup the project in your local environment, follow the steps below:
