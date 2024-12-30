@@ -76,3 +76,21 @@ dbt-build:
 dbt-compile:
 	cd dbt && dbt compile
 
+download-data:
+	python3 src/downloaders/s3.py --folder staging --output ./data/public
+	python3 src/downloaders/s3.py --folder curated --output ./data/public
+
+create-data-schema:
+	python3 src/uploaders/generate_kaggle_schema.py
+
+kaggle-create-dataset:
+	kaggle datasets create -p ./data/public/ --public
+
+kaggle-update-dataaset:
+	kaggle datasets version -p ./data/public/ -m 'Update data'
+
+kaggle-upload: download-data create-data-schema kaggle-update-dataaset
+kaggle-upload:
+	rm -rf data/public/*.csv
+
+	
