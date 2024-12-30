@@ -24,6 +24,7 @@ dependencies = [
     "s3fs>=2024.10.0",
     "football-data-extractor",
     "ipykernel>=6.29.5",
+    "kaggle>=1.6.17",
 ]
 
 [tool.dagster]
