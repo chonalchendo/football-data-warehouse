@@ -94,6 +94,7 @@ This will output the following:
 ```bash
 Available commands:
   make dagster-dev             : Run dagster dev server
+  make dagster-asset-list      : List all available dagster assets
   make dagster-run-asset       : Materialise a specific dagster asset
   make dagster-asset-partition : Materialise a specific dagster asset partition
   make dagster-job-partitions  : Run a specific dagster job with partitions
