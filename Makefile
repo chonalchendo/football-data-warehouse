@@ -14,6 +14,7 @@ IMAGE_TAG = $(PLATFORM_TAG)-$(BRANCH)
 help:
 	@echo "Available commands:"
 	@echo "  make dagster-dev             : Run dagster dev server"
+	@echo "  make dagster-asset-list      : List all dagster assets"
 	@echo "  make dagster-run-asset       : Materialise a specific dagster asset"
 	@echo "  make dagster-asset-partition : Materialise a specific dagster asset partition"
 	@echo "  make dagster-job-partitions  : Run a specific dagster job with partitions"
@@ -60,6 +61,9 @@ docker-pipeline: docker-build docker-transfermarkt-crawler
 
 dagster-dev:
 	uv run dagster dev -m orchestrator.orchestrator
+
+dagster-asset-list:
+	uv run dagster asset list -m orchestrator.orchestrator
 
 dagster-run-asset:
 	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET)
