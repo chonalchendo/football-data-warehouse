@@ -55,6 +55,18 @@ uv sync
 source .venv/bin/activate
 ```
 
+### Environment Variables
+
+Before the `scrapy` `transfermarkt` spider can run, you will have to create a `.env` file in your root directory
+and add the following:
+
+```dotenv
+USER_AGENT= # your user agent
+```
+
+Your user agent is read into the `src/extractors/settings.py` file from which it is fed to the `transfermarkt` scraper
+in the `src/extractors/transfermarkt.py` file.
+
 ### AWS Configuation
 
 Currently, the project is set up to store the data locally in `DuckDB` and in an `AWS S3` bucket.
