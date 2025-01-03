@@ -64,6 +64,8 @@ and add the following:
 USER_AGENT= # your user agent
 ```
 
+You can get your user agent by visiting [this](https://www.whatismybrowser.com/detect/what-is-my-user-agent) website.
+
 Your user agent is read into the `src/extractors/settings.py` file from which it is fed to the `transfermarkt` scraper
 in the `src/extractors/transfermarkt.py` file.
 
