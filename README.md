@@ -21,6 +21,8 @@ The data parsed and transformed in this project are available on Kaggle [here](h
 
 ## Setup
 
+### Clone the repository
+
 To setup the project in your local environment, follow the steps below:
 
 1. Clone the repository
@@ -52,6 +54,15 @@ uv sync
 ```bash
 source .venv/bin/activate
 ```
+
+### AWS Configuation
+
+Currently, the project is set up to store the data locally in `DuckDB` and in an `AWS S3` bucket.
+I haven't yet configured AWS credentials for public access to the S3 bucket, so there will be an error
+when running the pipeline; however it shouldn't actually the pipeline from running.
+
+I still learning about `Terraform` which should help me to provide the IAM roles and policies needed for
+public access the S3 bucket.
 
 ## Running the pipeline
 
