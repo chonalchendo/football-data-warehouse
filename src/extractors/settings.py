@@ -8,9 +8,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class TransfermarktConfig(BaseSettings):
     SPIDER_MODULES: list[str] = ["transfermarkt"]
     NEWSPIDER_MODULE: list[str] = ["transfermarkt"]
-    USER_AGENT: str = (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    )
     ROBOTSTXT_OBEY: bool = True
     DOWNLOAD_DELAY: int = 1
     COOKIES_ENABLED: bool = False
@@ -41,6 +38,7 @@ class TransfermarktConfig(BaseSettings):
         case_sensitive=True,
     )
 
+    USER_AGENT: str
     GCP_PROJECT: str
     GCP_CREDENTIALS_PATH: str
 
