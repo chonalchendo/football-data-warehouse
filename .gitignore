@@ -10,6 +10,7 @@ __pycache__/
 **/terraform.tfstate
 **/.terraform.tfstate.backup
 **/.terraform.lock.hcl
+**/terraform.tfstate**
 **/creds.tf
 
 notebooks/
@@ -18,3 +19,7 @@ logs/
 .pytest_cache/
 
 artifacts/
+
+data/public/
+
+.DS_Store
