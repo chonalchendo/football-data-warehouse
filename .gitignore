@@ -16,3 +16,5 @@ notebooks/
 logs/
 
 .pytest_cache/
+
+artifacts/
