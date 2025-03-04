@@ -2,6 +2,7 @@
 name = "football-data-warehouse"
 version = "0.1.0"
 description = "Warehouse for football data from multiple sources"
+authors = [{ name = "Conal Henderson", email = "github@chonalchendo.dev" }]
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12.0"
@@ -13,22 +14,46 @@ dependencies = [
     "dbt-core>=1.8.8",
     "dbt-duckdb>=1.9.1",
     "scrapy>=2.12.0",
-    "black>=24.10.0",
-    "isort>=5.13.2",
     "pandas>=2.2.3",
     "pycountry>=24.6.1",
     "pycountry-convert>=0.7.2",
     "pydantic-settings>=2.6.1",
     "dagit>=1.9.4",
-    "pre-commit>=4.0.1",
     "s3fs>=2024.10.0",
     "football-data-extractor",
-    "ipykernel>=6.29.5",
     "kaggle>=1.6.17",
 ]
 
 [tool.dagster]
-module_name = 'orchestrator'
+module_name = 'foothouse.orchestrator'
 
 [tool.uv.sources]
 football-data-extractor = { git = "https://github.com/chonalchendo/football-data-extractor.git" }
+
+[dependency-groups]
+checks = [
+    "mypy>=1.15.0",
+    "pre-commit>=4.0.1",
+    "ruff>=0.9.8",
+    "sqlfluff-templater-dbt>=3.3.1",
+    "sqlfluff>=3.3.1",
+]
+notebooks = [
+    "ipykernel>=6.29.5",
+]
+
+[tool.uv]
+default-groups = ["checks", "notebooks"]
+
+[tool.ruff]
+fix = true
+indent-width = 4
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
