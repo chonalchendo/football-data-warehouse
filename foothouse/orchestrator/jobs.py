@@ -1,6 +1,11 @@
-from dagster import (AssetSelection, RunRequest, define_asset_job,
-                     in_process_executor, multi_or_in_process_executor,
-                     schedule)
+from dagster import (
+    AssetSelection,
+    RunRequest,
+    define_asset_job,
+    in_process_executor,
+    multi_or_in_process_executor,
+    schedule,
+)
 
 from foothouse.orchestrator.constants import CURRENT_SEASON
 
