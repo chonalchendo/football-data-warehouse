@@ -19,7 +19,7 @@ RUN git config --global user.email "football-data-warehouse-ci@football-data-war
     git config --global user.name "CI Job" && \
     git config --global core.sshCommand "ssh -o StrictHostKeyChecking=no" 
 
-ADD src/bootstrap.sh /app
+ADD scripts/bootstrap.sh /app
     
 # Allow branch to be passed as a build argument with a default
 ARG BRANCH=master
