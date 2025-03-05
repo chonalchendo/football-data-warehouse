@@ -23,3 +23,5 @@ artifacts/
 data/public/
 
 .DS_Store
+
+.ruff_cache/
