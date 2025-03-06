@@ -9,6 +9,12 @@ from dagster import (
 
 from foothouse.orchestrator.constants import CURRENT_SEASON
 
+github_actions_test_job = define_asset_job(
+    name="github_actions_test_job",
+    selection=["raw", "transfermarkt", "squads"],
+    executor_def=in_process_executor,
+)
+
 transfermarkt_raw_assets = define_asset_job(
     name="transfermarkt_raw_assets",
     selection=AssetSelection.key_prefixes("raw", "transfermarkt"),
