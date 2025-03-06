@@ -1,8 +1,19 @@
-from dagster import (AssetSelection, RunRequest, define_asset_job,
-                     in_process_executor, multi_or_in_process_executor,
-                     schedule)
+from dagster import (
+    AssetSelection,
+    RunRequest,
+    define_asset_job,
+    in_process_executor,
+    multi_or_in_process_executor,
+    schedule,
+)
 
-from .constants import CURRENT_SEASON
+from foothouse.orchestrator.constants import CURRENT_SEASON
+
+github_actions_test_job = define_asset_job(
+    name="github_actions_test_job",
+    selection=["raw", "transfermarkt", "squads"],
+    executor_def=in_process_executor,
+)
 
 transfermarkt_raw_assets = define_asset_job(
     name="transfermarkt_raw_assets",

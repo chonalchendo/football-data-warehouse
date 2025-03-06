@@ -46,4 +46,4 @@ select
     annual_wages_eur :: integer as annual_wages_eur,
     annual_wages_usd :: integer as annual_wages_usd,
     season :: integer as season
-from annual_wage_values
+from annual_wage_values;

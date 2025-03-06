@@ -4,12 +4,19 @@ from dagster import Definitions, load_assets_from_modules
 from dagster_dbt import DbtCliResource
 
 from .assets import seeds, transfermarkt
-from .assets.dbt import (export_dbt_models_to_s3, export_fbref_models_to_s3,
-                         my_dbt_assets)
+from .assets.dbt import (
+    export_dbt_models_to_s3,
+    export_fbref_models_to_s3,
+    my_dbt_assets,
+)
 from .assets.fbref import generate_fbref_stat_asset, player_wages
 from .constants import FBREF_STATS_COLLECTORS
-from .jobs import (fbref_stats_job, fbref_stats_schedule,
-                   transfermarkt_raw_assets, transfermarkt_raw_schedule)
+from .jobs import (
+    fbref_stats_job,
+    fbref_stats_schedule,
+    transfermarkt_raw_assets,
+    transfermarkt_raw_schedule,
+)
 from .project import dbt_project_dir
 from .resources import S3PartitionedParquetIOManager
 

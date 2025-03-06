@@ -6,7 +6,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from scrapy.utils.project import get_project_settings
 
-from .settings import get_config
+from foothouse.extractors.settings import get_config
 
 
 def set_scrapy_settings() -> Settings:

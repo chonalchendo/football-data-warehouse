@@ -1,9 +1,8 @@
 import polars as pl
 from dagster import AssetExecutionContext, asset
 
-from src.extractors.transfermarkt import run_clubs_spider, run_squads_spider
-
-from ..partitions import SEASON_PARTITIONS
+from foothouse.extractors.transfermarkt import run_clubs_spider, run_squads_spider
+from foothouse.orchestrator.partitions import SEASON_PARTITIONS
 
 
 @asset(

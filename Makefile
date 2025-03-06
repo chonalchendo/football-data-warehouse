@@ -11,6 +11,7 @@ BRANCH ?= master
 IMAGE_TAG = $(PLATFORM_TAG)-$(BRANCH)
 
 # Help target
+.PHONY: help
 help:
 	@echo "Available commands:"
 	@echo "  make dagster-dev             : Run dagster dev server"
@@ -21,80 +22,111 @@ help:
 	@echo "  make dbt-build               : Run pipeline for dbt assets"
 	@echo "  make dbt-compile             : Compile dbt models"
 
+.PHONY: check_format
+check_format:
+	@echo "Checking format of codebase..."
+	uv run ruff check
 
+.PHONY: format
 format:
-	@echo "Running formatter"
-	black .
-	isort .
+	@echo "Running formatter..."
+	uv run ruff check --select I --fix . # sort imports
+	uv run ruff format . # format files
+
+.PHONY: check_types
+check_types:
+	@echo "Checking types..."
+	uv run mypy foothouse/
+
+.PHONY: sql_lint
+sql_lint:
+	@echo "Linting SQL files..."
+	uv run sqlfluff lint dbt/models --dialect duckdb
+
+.PHONY: sql_fix
+sql_fix:
+	@echo "Fixing SQL files..."
+	uv run sqlfluff fix dbt/models --dialect duckdb
+
 
 # Target to build the docker image
-docker-build:
+.PHONY: docker_build
+docker_build:
 	@echo "Building docker image..."
 	docker build \
 	--platform=$(PLATFORM) \
 	--build-arg BRANCH=$(BRANCH) \
 	-t $(DOCKER_IMAGE_NAME):$(IMAGE_TAG) .
 
-docker-login-dockerhub:
+.PHONY: docker_login_dockerhub
+docker_login_dockerhub:
 	@echo "Logging in to DockerHub with token"
 	@echo ${DOCKER_TOKEN}	| docker login --username chonalchendo --password-stdin
 
-docker-push-dockerhub: docker-build docker-login-dockerhub
+.PHONY: docker_push_dockerhub
+docker_push_dockerhub: docker_build docker_login_dockerhub
 	@echo "Pushing docker image..."
 	docker push $(DOCKER_IMAGE_NAME):$(IMAGE_TAG)
 
-# Target to run the docker image with the transfermarkt pipeline
-docker-transfermarkt-crawler:
-	docker run -it \
-		-v $(PWD):/app \
-    -v $(LOCAL_GCP_CREDS):$(DOCKER_GCP_CREDS) \
-    --env-file .env \
-    $(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(TRANSFERMARKT_ARGS)
+# # Target to run the docker image with the transfermarkt pipeline
+# .PHONY: docker_transfermarkt_crawler
+# docker_transfermarkt_crawler:
+# 	docker run -it \
+# 		-v $(PWD):/app \
+# 		-v $(LOCAL_GCP_CREDS):$(DOCKER_GCP_CREDS) \
+# 		--env-file .env \
+# 		$(DOCKER_IMAGE_NAME) /app/src/run.sh $(EXTRACT_SCRIPT) $(TRANSFERMARKT_ARGS)
 
-# Target to build and run the docker image
-docker-pipeline: docker-build docker-transfermarkt-crawler
+# # Target to build and run the docker image
+# docker-pipeline: docker-build docker-transfermarkt-crawler
 
-# DVC pull data from gcp 
-# dvc_pull:
-# 	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
-# 	dvc pull
+# # DVC pull data from gcp 
+# # dvc_pull:
+# # 	dvc remote modify --local gcs credentialpath $(LOCAL_GCP_CREDS)
+# # 	dvc pull
 
-dagster-dev:
-	uv run dagster dev -m orchestrator.orchestrator
+.PHONY: dagster_dev
+dagster_dev:
+	uv run dagster dev -m foothouse.orchestrator
 
-dagster-asset-list:
-	uv run dagster asset list -m orchestrator.orchestrator
+# dagster-asset-list:
+# 	uv run dagster asset list -m orchestrator.orchestrator
 
-dagster-run-asset:
-	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET)
+# dagster-run-asset:
+# 	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET)
 
-dagster-asset-partition:
-	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASON)
+# dagster-asset-partition:
+# 	uv run dagster asset materialize -m orchestrator.orchestrator --select $(ASSET) --partition $(SEASON)
 
-dagster-job-partitions:
-	uv run dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON)
+# dagster-job-partitions:
+# 	uv run dagster job backfill -m orchestrator.orchestrator -j $(JOB) --partitions $(SEASON)
 
-dbt-build:
-	cd dbt && dbt build
+# dbt-build:
+# 	cd dbt && dbt build
 
-dbt-compile:
-	cd dbt && dbt compile
+# dbt-compile:
+# 	cd dbt && dbt compile
 
-download-data:
+.PHONY: download_data
+download_data:
 	python3 src/downloaders/s3.py --folder staging --output ./data/public
 	python3 src/downloaders/s3.py --folder curated --output ./data/public
 
-create-data-schema:
+.PHONY: create_data_schema
+create_data_schema:
 	python3 src/uploaders/generate_kaggle_schema.py
 
-kaggle-create-dataset:
+.PHONY: kaggle_create_dataset
+kaggle_create_dataset:
 	kaggle datasets create -p ./data/public/ --public
 
-kaggle-update-dataaset:
+.PHONY: kaggle_update_dataaset
+kaggle_update_dataaset:
 	kaggle datasets version -p ./data/public/ -m 'Update data'
 
-kaggle-upload: download-data create-data-schema kaggle-update-dataaset
-kaggle-upload:
+.PHONY: kaggle_upload
+kaggle_upload: download_data create_data_schema kaggle_update_dataaset
+kaggle_upload:
 	rm -rf data/public/*.csv
 
 	

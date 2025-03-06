@@ -5,8 +5,8 @@ import s3fs
 from dagster import AssetExecutionContext, asset
 from dagster_dbt import DbtCliResource, dbt_assets, get_asset_key_for_model
 
-from ..constants import FBREF_STATS_COLLECTORS
-from ..project import dbt_project
+from foothouse.orchestrator.constants import FBREF_STATS_COLLECTORS
+from foothouse.orchestrator.project import dbt_project
 
 
 @dbt_assets(

@@ -1,6 +1,6 @@
 from fbref.fbref import NavigatorRunner, ParquetFeed
 
-from .settings import get_config
+from foothouse.extractors.settings import get_config
 
 
 def run_stats_crawler(collector: str, season: str) -> None:

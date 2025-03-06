@@ -3,8 +3,8 @@ import time
 import polars as pl
 from dagster import AssetExecutionContext, asset
 
-from src.extractors.fbref import run_stats_crawler, run_wage_crawler
-from src.extractors.settings import get_config
+from foothouse.extractors.fbref import run_stats_crawler, run_wage_crawler
+from foothouse.extractors.settings import get_config
 
 from ..partitions import SEASON_PARTITIONS
 

@@ -9,17 +9,17 @@ player_wages as (
 
 -- join data on name, season, and squad
 valuations_data as (
-    select 
+    select
         squads.*,
         player_wages.*
     from squads
     inner join player_wages on
-    squads.player = player_wages.player and
-    squads.season = player_wages.season and
-    squads.squad = player_wages.squad
+        squads.player = player_wages.player
+        and squads.season = player_wages.season
+        and squads.squad = player_wages.squad
 )
 
-select  
+select
     player,
     age,
     dob,
