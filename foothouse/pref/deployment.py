@@ -4,12 +4,13 @@ from pydantic_settings import BaseSettings
 from foothouse.utils import read_requirements
 
 # SOURCE_REPO = "https://github.com/chonalchendo/football-data-warehouse.git"
+SOURCE_REPO = (
+    "https://github.com/chonalchendo/football-data-warehouse/tree/development.git"
+)
 
 
 class DeployConfig(BaseSettings):
-    SOURCE_REPO: str = (
-        "https://github.com/chonalchendo/football-data-warehouse/tree/development.git"
-    )
+    SOURCE_REPO: str = SOURCE_REPO
     SEASON: int = 2024
     PARAMETERS: dict = dict(season=SEASON)
     DEPLOY_NAME: str = "transfermarkt-crawler"
