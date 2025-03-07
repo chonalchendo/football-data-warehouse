@@ -1129,6 +1129,7 @@ dependencies = [
     { name = "kaggle" },
     { name = "pandas" },
     { name = "prefect" },
+    { name = "prefect-docker" },
     { name = "pycountry" },
     { name = "pycountry-convert" },
     { name = "pydantic-settings" },
@@ -1161,6 +1162,7 @@ requires-dist = [
     { name = "kaggle", specifier = ">=1.6.17" },
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "prefect", specifier = ">=3.2.11" },
+    { name = "prefect-docker", specifier = ">=0.6.2" },
     { name = "pycountry", specifier = ">=24.6.1" },
     { name = "pycountry-convert", specifier = ">=0.7.2" },
     { name = "pydantic-settings", specifier = ">=2.6.1" },
@@ -2603,6 +2605,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ca/d5/c45393722125152eb45daeefb11aab01bf79dba040c2f5ce0423a91a4035/prefect-3.2.11.tar.gz", hash = "sha256:f6227a1f4db1bb49a04c9f6c94518edaa6befda7423927874b3c70e849ddb460", size = 5785742 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/de/ca/4e05755d47b5666f19f663289a9de50d26552d7a75782bacd964a48237b0/prefect-3.2.11-py3-none-any.whl", hash = "sha256:47b0f8dab3aec26c921b3d92be8243f802e09f74420da0faa68cd984e1e03583", size = 6272249 },
+]
+
+[[package]]
+name = "prefect-docker"
+version = "0.6.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "docker" },
+    { name = "exceptiongroup" },
+    { name = "prefect" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/77/fc/fcf64753a7b6373ad31669f0c0df928d51f8edbd3a6b56adbd1799153acf/prefect_docker-0.6.2.tar.gz", hash = "sha256:405cdf2b266c7e1ffcb61f5b80c710401bc2eb5f25dcbccc195b0e5c86f5a421", size = 33777 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/55/6f81b38f6190779904d02179a5589d5d5b84c7167fbd8d7c5827dd584083/prefect_docker-0.6.2-py3-none-any.whl", hash = "sha256:bae500ff0c18e3e1c55f2e79ec154bc1f8c8329fbe6a3726052dfb0fe38d7d4c", size = 23661 },
 ]
 
 [[package]]
