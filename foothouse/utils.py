@@ -15,7 +15,7 @@ def read_config():
             print(exc)
 
 
-def read_requirements(file_path="../requirements.txt"):
+def read_requirements(file_path: Path = Path("requirements.txt").resolve()):
     """Read and parse requirements.txt file"""
-    reqs = [req.strip() for req in Path(file_path).read_text().splitlines()]
+    reqs = [req.strip() for req in file_path.read_text().splitlines()]
     return [req for req in reqs if req and not req.startswith("#")]
